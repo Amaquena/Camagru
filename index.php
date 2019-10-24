@@ -1,15 +1,12 @@
 <?php include "header.php"; ?>
-<style> 
-<?php include "style.css"; ?>
-</style>
 
 <main>
 <div class="center">
 	<div class="logins">
 		<form action="includes/login.inc.php" method="post">
-			<input id="email" type="text" name="mailuid" placeholder="Username/E-mail"><br>
-			<input id="pwd" type="password" name="pwd" placeholder="Password"><br>
-			<button class="login-butt" type="submit" name="login-submit">Login</button><br>
+			<input id="email" onkeyup="stoppedTyping()" type="text" name="mailuid" placeholder="Username/E-mail"><br>
+			<input id="pwd" onkeyup="stoppedTyping()" type="password" name="pwd" placeholder="Password"><br>
+			<button id="login-butt" type="submit" name="login-submit">Login</button><br>
 		</form>
 			<input type="button" class="signup-butt" value="Signup" onclick="location.href='signup.php';"/>
 			<!-- <form action="signup.php">
@@ -18,7 +15,16 @@
 	</div>
 </div>
 </main>
+<script>
+$m = document.getElementById("email");
+$p = document.getElementById("pwd");
+function	stoppedTyping(){
+	if ($m.value.length > 0 && $p.value.length > 0){
+		document.getElementById("login-butt").disable = false;
+	} else {
+		document.getElementById("login-butt").disable = true;
+	}
+}
+</script>
 
-<?php
-	require "footer.php";
-?>
+<?php require "footer.php"; ?>
