@@ -12,12 +12,12 @@ if (isset($_POST['signup-submit']))
 		header("Location: ../signup.php?error=emptyfields&uid=".$username."&mail=".$email);
 		exit();
 	}
-	else if (!filter_var($email, FILTET_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username))
+	else if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username))
 	{
 		header("Location: ../signup.php?error=invalidmailuid");
 		exit();
 	}
-	else if (!filter_var($email, FILTET_VALIDATE_EMAIL))
+	else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
 	{
 		header("Location: ../signup.php?error=invalidmail&uid=".$username);
 		exit();
@@ -34,17 +34,41 @@ if (isset($_POST['signup-submit']))
 	}
 	else
 	{
-		// TEST THIS
-		try {
-			$sql = "SELECT uidUser FROM users WHERE uidUsers=?";
-			$stmt = $conn->prepare($sql);
-			$stmt->execute();
+		try {	
+			$sql1 = "SELECT COUNT(*) FROM `users` Where emailUsers=:mail";
+			$query = $conn->prepare($sql1);
+			$query->bindParam(":mail", $email);
+			$query->execute();
+			$count = $query->fetchColumn();
+			if ($count > 0)
+			{
+				header("Location: ../signup.php?error=mailtaken=".$username);
+				exit();
+			}
+			else{
+				$sql = "INSERT `users` (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)";
+				$hashed =  password_hash($password, PASSWORD_DEFAULT);
+				$stmt = $conn->prepare($sql);
+				$stmt->bindParam(1, $username);
+				$stmt->bindParam(2, $email);
+				$stmt->bindParam(3, $hashed);
+				$stmt->execute();
+				header("Location: ../signup.php?signp=success");
+				exit();	
+			}
 		}
 		catch (PDOException $e)
 		{
+			die("Connection failed: " . $e->getMessage());
 			header("Location: ../signup.php?error=sqlerror");
 			exit();	
 		}
 	}
+	$conn = null;
+}
+else
+{
+	header("Location: ../signup.php");
+	exit();	
 }
 ?>
