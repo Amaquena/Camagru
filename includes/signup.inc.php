@@ -59,7 +59,6 @@ if (isset($_POST['signup-submit']))
 		}
 		catch (PDOException $e)
 		{
-			die("Connection failed: " . $e->getMessage());
 			header("Location: ../signup.php?error=sqlerror");
 			exit();	
 		}
