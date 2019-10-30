@@ -5,7 +5,7 @@
 // $dbName = "camagru_users";
 
 try {
-	$conn = new PDO("mysql:host=localhost;dbname=camagru_users;", "root", "admins");
+	$conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "admins");
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	// insert data into the users table of the database using PDO

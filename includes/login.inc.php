@@ -10,15 +10,32 @@ if (isset($_POST['login-submit'])) {
 		exit();
 	} else {
 		try {
-			$sql = "SELECT * FROM `users` WHERE `uidUsers` = :mailuid";
+			$sql = "SELECT * FROM `users` WHERE `username`=:mailuid OR `email` = :mailuid";
 			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":mailuid", $mailuid);
 			$stmt->execute();
-			$result = $stmt->fetchColumn();
-			print_r($result);
-			echo "hi";
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			$passCheck = password_verify($password, $result['password']);
+			if ($passCheck == false)
+			{
+				header("Location: ../index.php?error=wrongpwd");
+				exit();				
+			}
+			else if ($passCheck == true)
+			{
+				session_start();
+				$_SESSION['userId'] = $result['user_id'];
+				$_SESSION['username'] = $result['username'];
+				$_SESSION['active'] = $result['active'];
+				header("Location: ../main.php");
+				exit();
+			}
+			else
+			{
+				header("Location: ../index.php?error=wrongpwd");
+				exit();				
+			}
 		} catch (PDOException $e) {
-			die("Connection failed: " . $e->getMessage());
 			header("Location: ../index.php?error=sqlerror");
 			exit();
 		}

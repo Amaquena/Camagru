@@ -1,3 +1,5 @@
+<?php session_start() ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -10,23 +12,16 @@
 </head>
 <header>
 	<div id="header-image"></div>
-	<div class="sidebar">
-		<div class="ham"></div>
-		<div class="ham"></div>
-		<div class="ham"></div>
-		<div class="dropdown">
-			<ul>
-				<li><a class="active" href="#">Account</a></li>
-				<li><a href="#">Editor</a></li>
-				<li><a href="#">Gallary</a></li>
-				<li><a href="#">Profile</a></li>
-				<li><a href="#">Logout</a></li>
-			</ul>
-		</div>
-		<!-- <form action="inludes/logout.inc.php" method="post">
-						<button id="logout-butt" type="submit" name="logout-submit">Logout</button>
-					</form> -->
-	</div>
+	<div class="header-input"></div>
+	<form action="includes/login.inc.php" method="post">
+		<input type="text" name="mailuid" placeholder="Username/E-mail">
+		<input type="password" name="pwd" placeholder="Password">
+		<button type="submit" name="login-submit">Login</button>
+	</form>
+		<input type="button" value="Signup" onclick="location.href='signup.php';" >
+		<form action="inludes/logout.inc.php" method="post">
+			<button id="logout-butt" type="submit" name="logout-submit">Logout</button>
+		</form>
 </header>
 
 </html>

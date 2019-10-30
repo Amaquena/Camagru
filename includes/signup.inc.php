@@ -35,7 +35,7 @@ if (isset($_POST['signup-submit']))
 	else
 	{
 		try {	
-			$sql1 = "SELECT COUNT(*) FROM `users` Where emailUsers=:mail";
+			$sql1 = "SELECT COUNT(*) FROM `users` Where email=:mail";
 			$query = $conn->prepare($sql1);
 			$query->bindParam(":mail", $email);
 			$query->execute();
@@ -46,15 +46,20 @@ if (isset($_POST['signup-submit']))
 				exit();
 			}
 			else{
-				$sql = "INSERT `users` (uidUsers, emailUsers, pwdUsers) VALUES (?, ?, ?)";
+				$sql = "INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)";
 				$hashed =  password_hash($password, PASSWORD_DEFAULT);
 				$stmt = $conn->prepare($sql);
 				$stmt->bindParam(1, $username);
 				$stmt->bindParam(2, $email);
 				$stmt->bindParam(3, $hashed);
 				$stmt->execute();
-				header("Location: ../signup.php?signp=success");
-				exit();	
+
+				session_start();
+				$_SESSION['userId'] = $result['user_id'];
+				$_SESSION['username'] = $result['username'];
+				$_SESSION['active'] = $result['active'];
+				header("Location: ../main.php");
+				exit();
 			}
 		}
 		catch (PDOException $e)

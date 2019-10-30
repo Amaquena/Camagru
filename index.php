@@ -9,13 +9,16 @@
 					<input id="pwd" onkeyup="stoppedTyping()" type="password" name="pwd" placeholder="Password"><br>
 					<button id="login-butt" type="submit" name="login-submit">Login</button><br>
 				</form>
-				<input type="button" class="signup-butt" value="Signup" onclick="location.href='signup.php';" />
+				<input type="button" class="signup-butt" value="Signup" onclick="location.href='signup.php';" ><br>
+				<form action="main.php" method="get">
+					<input type="submit" name="guest" value="guest" class="guest-butt">
+				</form>
 				<!-- <form action="signup.php">
 						<button class="signup-butt" type="submit" name="signup-butt">Signup</button>
 					</form> -->
 			</div>
 		</div>
-		<script>
+		<!-- <script>
 			$m = document.getElementById("email");
 			$p = document.getElementById("pwd");
 
@@ -26,7 +29,7 @@
 					document.getElementById("login-butt").disable = true;
 				}
 			}
-		</script>
+		</script> -->
 </main>
 
 <?php require "footer.php"; ?>
