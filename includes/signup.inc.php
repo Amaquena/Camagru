@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['signup-submit'])) {
-	require 'dbh.inc.php';
+	require 'config.php';
 
 	$username = $_POST['uid'];
 	$email = $_POST['mail'];
@@ -23,31 +23,67 @@ if (isset($_POST['signup-submit'])) {
 		exit();
 	} else {
 		try {
-			$sql1 = "SELECT COUNT(*) FROM `users` Where email=:mail";
-			$query = $conn->prepare($sql1);
-			$query->bindParam(":mail", $email);
-			$query->execute();
-			$count = $query->fetchColumn();
-			if ($count > 0) {
-				header("Location: ../signup.php?error=mailtaken&uid=" . $username);
-				exit();
-			} else {
-				$sql = "INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)";
-				$hashed =  password_hash($password, PASSWORD_DEFAULT);
-				$stmt = $conn->prepare($sql);
-				$stmt->bindParam(1, $username);
-				$stmt->bindParam(2, $email);
-				$stmt->bindParam(3, $hashed);
-				$stmt->execute();
+			// $sql = "SELECT COUNT(*) FROM `users` Where email=:mail";
+			// $stmt = $conn->prepare($sql);
+			// $stmt->bindParam(":mail", $email);
+			// $stmt->execute();
+			// $count = $stmt->fetchColumn();
+			// if ($count > 0) {
+			// 	header("Location: ../signup.php?error=mailtaken&uid=" . $username);
+			// 	exit();
+			// } else {
+			// $sql = "INSERT INTO `users` (username, email, password) VALUES (?, ?, ?)";
+			// $hashed =  password_hash($password, PASSWORD_DEFAULT);
+			// $stmt = $conn->prepare($sql);
+			// $stmt->bindParam(1, $username);
+			// $stmt->bindParam(2, $email);
+			// $stmt->bindParam(3, $hashed);
+			// $stmt->execute();
 
-				session_start();
-				$_SESSION['userId'] = $result['user_id'];
-				$_SESSION['username'] = $result['username'];
-				$_SESSION['active'] = $result['active'];
-				header("Location: ../main.php");
-				exit();
+			$sql = "SELECT * FROM `users` WHERE email=:mail";
+			$stmt = $conn->prepare($sql);
+			$stmt->bindParam(":mail", $email);
+			$stmt->execute();
+
+			$result = $stmt->fetchAll();
+
+			if (isset($result)) {
+				try {
+					$mail_body = '
+					<p>Hi ' . $username . ',</p>
+					<p>Thanks for Registration.</p>
+					<p>Please Open this link to verified your email address</p>
+					<p>Best Regards,<br />John Doe</p>
+					';
+					require_once('PHPMailer/src/PHPMailer.php');
+
+					$mail = new phpmailer();
+					$mail->IsSMTP();
+					$mail->SMTPAuth = true;
+					$mail->SMTPSecure = 'ssl';
+					$mail->Host = 'smtp.gmail.com';
+					$mail->Port = '465';
+					$mail->isHTML();
+					$mail->Username = 'amaquena@student.wethinkcode.co.za';
+					$mail->Password = 'Twinkie2000!';
+					// $mail->SetFrom = 'no-reply@student.wethinkcode.co.z';
+					$mail->Subject = 'Email Verication';
+					$mail->Body = 'hello';
+					$mail->AddAdress($email, $username);
+					$mail->SMTPDebug  = 2;
+					// $mail->FromName = 'John';
+					// $mail->WordWrap = 50;
+					if ($mail->Send()) {
+						header("Location: ../index.php?success=regisered");
+						exit();
+					}
+				} catch (Exception $e) {
+					echo $mail->ErrorInfo;
+				}
 			}
+			// }
 		} catch (PDOException $e) {
+			echo $e->getMessage();
 			header("Location: ../signup.php?error=sqlerror");
 			exit();
 		}
