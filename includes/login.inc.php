@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['login-submit'])) {
-	require 'config.php';
+	require '../config/database.php';
 
 	$mailuid = $_POST['mailuid'];
 	$password = $_POST['pwd'];
@@ -50,7 +50,7 @@ else if (isset($_POST['logout-submit']))
 }
 else if (isset($_POST['guest-login-submit']))
 {
-	require 'dbh.inc.php';
+	require '../config/database.php';
 
 	$mailuid = $_POST['mailuid'];
 	$password = $_POST['pwd'];

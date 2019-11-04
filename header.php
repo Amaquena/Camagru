@@ -1,6 +1,4 @@
-<?php session_start();
-echo $_SESSION['userId'];
-?>
+<?php session_start();?>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +24,7 @@ echo $_SESSION['userId'];
 
 	<div class="nav-input">
 		<form action="includes/login.inc.php" method="post">
-			<button type="submit" name="logout-submit">Logout</button>
+			<button id="logout-butt" type="submit" name="logout-submit">Logout</button>
 		</form>
 	</div>';
 	}
@@ -36,6 +34,7 @@ echo $_SESSION['userId'];
 		<input type="text" name="mailuid" placeholder="Username/E-mail">
 		<input type="password" name="pwd" placeholder="Password">
 		<button type="submit" name="guest-login-submit">Login</button>
+		<input id="login-butt" type="button" value="Login" onclick="location.href=\'index.php\'";">
 		<input id="signup-butt" type="button" value="Signup" onclick="location.href=\'signup.php\'";">
 		</form>'?>
 		<?php
@@ -56,21 +55,3 @@ echo $_SESSION['userId'];
 </header>
 
 </html>
-
-<!-- <nav>
-		<ul class="nav-links">
-			<li><a href="">acount details</a></li>
-			<li><a href="">gallery</a></li>
-			<li><a href="">editor</a></li>
-		</ul>
-	</nav>
-
-	<div class="nav-input">
-		<form action="includes/login.inc.php" method="post">
-			<input type="text" name="mailuid" placeholder="Username/E-mail">
-			<input type="password" name="pwd" placeholder="Password">
-			<button type="submit" name="login-submit">Login</button>
-			<input id="signup-butt" type="button" value="Signup" onclick="location.href="signup.php";">
-			<button type="submit" name="logout-submit">Logout</button>
-		</form>
-	</div> -->

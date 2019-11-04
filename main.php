@@ -8,6 +8,9 @@
 		exit();
 	}
 	?>
+	<body>
+		
+	</body>
 </main>
 
 <?php require "footer.php"; ?>

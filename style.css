@@ -366,20 +366,10 @@ textarea {
 }
 
 /*####################### MY CSS CODE ##################################*/
+
+/*######################### Header style ###################*/
 body {
 	background-color: rgb(14, 155, 201);
-}
-
-footer {
-	position: fixed;
-	bottom: 3%;
-	left: 5%;
-	right: 5%;
-}
-
-footer h2 {
-	float: right;
-	font-style: italic;
 }
 
 header {
@@ -397,20 +387,17 @@ header p {
 	color: #ff0000;
 	font-style: oblique;
 	font-size: larger;
+	display: none;
 }
 #logo {
 	background-image: url(images/logo.png);
 	background-size: 100% 100%;
 	margin-right: auto;
 	background-repeat: no-repeat;
-	height: 80px;
-	width: 80px;
+	height: 50px;
+	width: 50px;
 	border-radius: 10px;
 	cursor: pointer;
-}
-
-nav {
-	margin-right: 10%;
 }
 
 .nav-links {
@@ -435,21 +422,35 @@ nav {
 .nav-links li a:hover {
 	color: #0088a9;
 }
-.nav-input button, #signup-butt {
+
+#logout-butt {
+	width: 70px;
+}
+
+.nav-input button:not(#logout-butt) {
+	display: none;
+}
+
+.nav-input input:not(#signup-butt):not(#login-butt) {
+	display: none;
+}
+
+.nav-input button, #signup-butt, #login-butt {
 	padding: 9px 25px;
 	background-color: rgba(0,136,169,1);
 	border: none;
 	border-radius: 50px;
 	cursor: pointer;
+	font-size: small;
 	transition: all 0.3 ease 0s;
 }
 
-.nav-input button:hover, #signup-butt:hover {
+.nav-input button:hover, #signup-butt:hover, #login-butt:hover{
 	background-color: rgba(0,136,169,0.8);
 }
 
 .center {
-	margin: 20% auto;
+	margin: 20% auto 0;
 	/* position: relative; */
 	background-color: rgb(255, 255, 255, 0.5);
 	/* height: 50vh; */
@@ -481,7 +482,7 @@ nav {
 .logins p {
 	color: #ff0000;
 	font-style: oblique;
-	font-size: larger;
+	font-size: medium;
 }
 
 #email, #pwd {
@@ -492,12 +493,12 @@ nav {
 	margin: 4% 0;
 }
 
-#login-butt {
+.logins #login-butt {
 	background-color: rgb(0, 106, 255);
 	/* font-size: 1.5vw; */
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 10px 10px 10px 10px;
-	height: 35px;
+	height: 25px;
 	width: 60%;
 	/* overflow: auto; */
 	/* margin-top: 5%; */
@@ -509,7 +510,7 @@ nav {
 	/* font-size: 1.5vw; */
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 10px 10px 10px 10px;
-	height: 35px;
+	height: 25px;
 	width: 60%;
 	/* overflow: auto; */
 	margin-top: 10%;
@@ -522,7 +523,7 @@ nav {
 	color: white;
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 10px 10px 10px 10px;
-	height: 35px;
+	height: 25px;
 	width: 60%;
 	margin-top: 15px;
 	margin-bottom: 5%;
@@ -539,35 +540,97 @@ nav {
 	/* margin: 0 auto; */
 }
 
+
+/*####################### Main style ##############################*/
+
+/*########################### Footer Style ##############################*/
+footer {
+	position: fixed;
+	bottom: 3%;
+	left: 5%;
+	right: 5%;
+}
+
+footer h2 {
+	float: right;
+	font-style: italic;
+}
+/*########################### Portalable styling ####################*/
+
 @media only screen and (min-width: 768px) {
+	nav {
+		margin-right: 10%;
+	}
+
+	#logo {
+		height: 80px;
+		width: 80px;
+	}
+	
 	.center {
 		width: 400px;
 		height: 450px;
 		border-radius: 15px;
 	}
-
+						
 	.logins h5 {
 		font-family: cursive;
 		font-size: 40px;
 		font-weight: 650;
 	}
-
+						
 	::-webkit-input-placeholder{
 		font-size: 15px;
 	}
-
+						
 	#email, #pwd {
 		padding: 10px;
 		width: 60%;
 	}
 
+	.nav-input button {
+		display: inline;
+	}
+						
 	.signup-butt {
 		margin-top: 5%;
+	}
+	
+	.nav-input input:not(#signup-butt):not(#login-butt) {
+		display: inline;
+	}
+
+	.nav-input button:not(#logout-butt) {
+		display: inline;
+	}
+
+	.nav-input #login-butt {
+		display: none;
+	}
+
+	header p {
+		display: block;
 	}
 }
 
 @media only screen and (min-width: 1000px) {
 	.center {
 		margin-top: 10%;
+	}
+
+	.logins p {
+		font-size: larger;
+	}
+
+	.logins #login-butt {
+		height: 35px;
+	}
+	.signup-butt {
+		height: 35px;
+	}
+
+	.guest-butt {
+		height: 35px;
+	
 	}
 }

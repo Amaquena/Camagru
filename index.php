@@ -29,9 +29,6 @@
 			<form action="main.php" method="get">
 				<input type="submit" name="guest" value="guest" class="guest-butt">
 			</form>
-			<!-- <form action="signup.php">
-				<button class="signup-butt" type="submit" name="signup-butt">Signup</button>
-			</form> -->
 		</div>
 	</div>
 	<!-- <script>

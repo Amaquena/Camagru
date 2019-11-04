@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['signup-submit'])) {
-	require 'config.php';
+	require '../config/database.php';
 
 	$username = $_POST['uid'];
 	$email = $_POST['mail'];
@@ -40,48 +40,25 @@ if (isset($_POST['signup-submit'])) {
 			// $stmt->bindParam(3, $hashed);
 			// $stmt->execute();
 
-			$sql = "SELECT * FROM `users` WHERE email=:mail";
-			$stmt = $conn->prepare($sql);
-			$stmt->bindParam(":mail", $email);
-			$stmt->execute();
+			$to = $email;
+			$subject = "Babe It's Me!";
+			$msg = '
+			 	<p>Hi ' . $username . ',</p>
+				<p>I just manage to figure out how to send an email via my website.</p>
+				<p>I\'m sending this from my website:)</p>
+				<p>With Love, From,<br /> Bear</p>
+				';
 
-			$result = $stmt->fetchAll();
+			// Always set content-type when sending HTML email
+			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-			if (isset($result)) {
-				try {
-					$mail_body = '
-					<p>Hi ' . $username . ',</p>
-					<p>Thanks for Registration.</p>
-					<p>Please Open this link to verified your email address</p>
-					<p>Best Regards,<br />John Doe</p>
-					';
-					require_once('PHPMailer/src/PHPMailer.php');
+			$headers .= 'From: Alvin <alvin1king@gmail.com>' . "\r\n";
 
-					$mail = new phpmailer();
-					$mail->IsSMTP();
-					$mail->SMTPAuth = true;
-					$mail->SMTPSecure = 'ssl';
-					$mail->Host = 'smtp.gmail.com';
-					$mail->Port = '465';
-					$mail->isHTML();
-					$mail->Username = 'amaquena@student.wethinkcode.co.za';
-					$mail->Password = 'Twinkie2000!';
-					// $mail->SetFrom = 'no-reply@student.wethinkcode.co.z';
-					$mail->Subject = 'Email Verication';
-					$mail->Body = 'hello';
-					$mail->AddAdress($email, $username);
-					$mail->SMTPDebug  = 2;
-					// $mail->FromName = 'John';
-					// $mail->WordWrap = 50;
-					if ($mail->Send()) {
-						header("Location: ../index.php?success=regisered");
-						exit();
-					}
-				} catch (Exception $e) {
-					echo $mail->ErrorInfo;
-				}
-			}
-			// }
+			if (mail($to,$subject,$msg,$headers))
+				echo "success";
+			else
+				echo "failed";
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 			header("Location: ../signup.php?error=sqlerror");
