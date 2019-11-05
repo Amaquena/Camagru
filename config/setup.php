@@ -17,14 +17,13 @@ try {
 		`username` TINYTEXT NOT NULL,
 		`email` TINYTEXT NOT NULL,
 		`password` TINYTEXT NOT NULL,
-		`pp_src` TINYTEXT NOT NULL,
-		`verified` BIT DEFAULT 0 NOT NULL
+		`pp_src` TINYTEXT,
+		`verified` BIT DEFAULT 0 NOT NULL,
+		`verification_code` varchar(264) NOT NULL
 		);";
 	$conn->exec($sql);
-	$conn = null;
 
 	// create image table
-	include 'database.php';
 	$sql = "CREATE TABLE IF NOT EXISTS `images`(
 		`image_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 		`image_src` TINYTEXT NOT NULL,
@@ -32,10 +31,8 @@ try {
 		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
 		);";
 	$conn->exec($sql);
-	$conn = null;
 
 	// create comment table
-	include 'database.php';
 	$sql = "CREATE TABLE IF NOT EXISTS `comments`(
 		`comment_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 		`comment` TEXT NOT NULL,

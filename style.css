@@ -485,6 +485,10 @@ header p {
 	font-size: medium;
 }
 
+.logins #success {
+	color: #0dff00;
+}
+
 #email, #pwd {
 	/* height: 30px; */
 	/* margin: 0 auto; */
@@ -532,17 +536,44 @@ header p {
 }
 
 #logout-butt {
-	/* height: 5vh; */
-	/* width: 15vh; */
 	float: right;
 	border-radius: 10px 10px 10px 10px;
-	/* font-size: 1vw; */
-	/* margin: 0 auto; */
 }
 
+/* ################### Gallery #############################  */
+.gallery {
+	background-color: beige;
+	width: 300px;
+	margin: 0 auto 30px;
+	overflow: hidden;
+
+}
+
+.gallery h2 {
+}
+
+.gallery div {
+	margin: 20px;
+	height: 220px;
+	background-color: #ccc;
+}
+
+/* ###############################################################  */
 
 /*####################### Main style ##############################*/
+.grid {
+	display: grid;
+	grid-template-columns: 50px 1fr 1fr;
+}
 
+.grid div:nth-child(even) {
+	background-color: #ccc;
+}
+
+.grid div:nth-child(odd) {
+	background-color: beige;
+}
+/* ###############################################################  */
 /*########################### Footer Style ##############################*/
 footer {
 	position: fixed;

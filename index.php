@@ -17,7 +17,14 @@
 				}
 				else if ($_GET['error'] == "nouser") {
 					echo '<p>Please sign-up to sign-in</p>';
+				} else if ($_GET['error'] == "updatefiles") {
+					echo '<p>Failed to verify account</p>';
 				}
+			}
+			else if ($_GET['success'] == "signup") {
+				echo '<p id="success">Registered!<br />Verify email to login<p>';
+			} else if ($_GET['success'] == "verified") {
+				echo '<p id="success">Verified!<br />Please login<p>';
 			}
 			?>
 			<form action="includes/login.inc.php" method="post">
