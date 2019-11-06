@@ -53,7 +53,7 @@ if (isset($_POST['signup-submit'])) {
 				$verificationcode = md5(uniqid(bin2hex(random_bytes(8)), true));
 				$verificationlink = "http://localhost:8081/camagru/includes/activate.inc.php?code=" . $verificationcode;
 				$to = $email;
-				$subject = "Email Verication!";
+				$subject = "Email Verification!";
 				$msg = "
 			 	<p>Hi $username,</p>
 				<p>Thank you for signing up, please click the link below to verify your account.<br /><br /></p>
@@ -65,7 +65,7 @@ if (isset($_POST['signup-submit'])) {
 				// $headers = "MIME-Version: 1.0" . "\r\n";
 				$headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-				$headers .= 'From: Bear <no-reply@gmail.com>' . "\r\n";
+				$headers .= 'From: Bear <no-reply@superposable.com>' . "\r\n";
 
 				if (mail($to, $subject, $msg, $headers)) {
 					$sql = "INSERT INTO `users` (username, email, password, verification_code) VALUES (?, ?, ?, ?)";

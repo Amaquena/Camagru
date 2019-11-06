@@ -13,12 +13,12 @@
 <header>
 	<div id="logo"></div>
 	<?php
-	if (isset($_SESSION['userId'])) {
-		echo '<nav>
+	if (isset($_SESSION['userId'])) { ?>
+		<nav>
 		<ul class="nav-links">
-			<li><a href="">profile</a></li>
-			<li><a href="">gallery</a></li>
-			<li><a href="">editor</a></li>
+			<li><a href="profile.php">profile</a></li>
+			<li><a href="gallery.php">gallery</a></li>
+			<li><a href="editor.php">editor</a></li>
 		</ul>
 	</nav>
 
@@ -26,17 +26,17 @@
 		<form action="includes/login.inc.php" method="post">
 			<button id="logout-butt" type="submit" name="logout-submit">Logout</button>
 		</form>
-	</div>';
+	</div> <?php
 	}
-	if (isset($_GET['guest'])) {
-		echo '<div class="nav-input">
+	if (isset($_GET['guest'])) { ?>
+		<div class="nav-input">
 		<form action="includes/login.inc.php" method="post">
 		<input type="text" name="mailuid" placeholder="Username/E-mail">
 		<input type="password" name="pwd" placeholder="Password">
 		<button type="submit" name="guest-login-submit">Login</button>
-		<input id="login-butt" type="button" value="Login" onclick="location.href=\'index.php\'";">
-		<input id="signup-butt" type="button" value="Signup" onclick="location.href=\'signup.php\'";">
-		</form>'?>
+		<input id="login-butt" type="button" value="Login" onclick="location.href='index.php'">
+		<input id="signup-butt" type="button" value="Signup" onclick="location.href='signup.php'">
+		</form>
 		<?php
 		if (isset($_GET['error'])) {
 			if ($_GET['error'] == "emptyfields") {

@@ -558,9 +558,35 @@ header p {
 	background-color: #ccc;
 }
 
-/* ###############################################################  */
+/* ###################### Profile style ##########################  */
 
-/*####################### Main style ##############################*/
+.user-info {
+	background-color: rgba(255, 255, 255, 0.5);
+	width: 300px;
+	margin: 0 auto;
+}
+
+#pp {
+	height: 150px;
+	width: 150px;
+	background-image: url(images/default-user-image.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: 30px auto 0;
+	border-radius: 10px;
+}
+
+/* ###################### Editor style ##########################  */
+
+#verify-tag {
+	color: #ff0000;
+	font-weight: 700;
+	font-size: medium;
+	text-align: center;
+	margin-top: 7%;
+}
+
+/*####################### Gallery style ##############################*/
 .grid {
 	display: grid;
 	grid-template-columns: 50px 1fr 1fr;
@@ -642,6 +668,10 @@ footer h2 {
 	header p {
 		display: block;
 	}
+
+	#verify-tag {
+		font-size: x-large;
+	}
 }
 
 @media only screen and (min-width: 1000px) {
@@ -663,5 +693,9 @@ footer h2 {
 	.guest-butt {
 		height: 35px;
 	
+	}
+
+	#verify-tag {
+		font-size: xx-large;
 	}
 }

@@ -28,8 +28,10 @@ if (isset($_POST['login-submit'])) {
 				session_start();
 				$_SESSION['userId'] = $result['user_id'];
 				$_SESSION['username'] = $result['username'];
-				$_SESSION['active'] = $result['active'];
-				header("Location: ../main.php");
+				$_SESSION['pp_src'] = $result['pp_src'];
+				$_SESSION['verify'] = $result['verified'];
+				$_SESSION['email'] = $result['email'];
+				header("Location: ../gallery.php");
 				exit();
 			} else {
 				header("Location: ../index.php?error=wrongpwd");
@@ -45,6 +47,7 @@ else if (isset($_POST['logout-submit']))
 {
 	session_start();
 	session_unset();
+	session_destroy();
 	header("Location: ../index.php");
 	exit();
 }
@@ -56,7 +59,7 @@ else if (isset($_POST['guest-login-submit']))
 	$password = $_POST['pwd'];
 
 	if (empty($mailuid) || empty($password)) {
-		header("Location: ../main.php?guest=guest&error=emptyfields");
+		header("Location: ../gallery.php?guest=guest&error=emptyfields");
 		exit();
 	} else {
 		try {
@@ -68,31 +71,33 @@ else if (isset($_POST['guest-login-submit']))
 			$passCheck = password_verify($password, $result['password']);
 			if (!$result)
 			{
-				header("Location: ../main.php?guest=guest&error=nouser");
+				header("Location: ../gallery.php?guest=guest&error=nouser");
 				exit();
 			}
 			if ($passCheck == false) {
-				header("Location: ../main.php?guest=guest&error=wrongpwd");
+				header("Location: ../gallery.php?guest=guest&error=wrongpwd");
 				exit();
 			} else if ($passCheck == true) {
 				session_start();
 				$_SESSION['userId'] = $result['user_id'];
 				$_SESSION['username'] = $result['username'];
-				$_SESSION['active'] = $result['active'];
-				header("Location: ../main.php");
+				$_SESSION['pp_src'] = $result['pp_src'];
+				$_SESSION['verify'] = $result['verified'];
+				$_SESSION['email'] = $result['email'];
+				header("Location: ../gallery.php");
 				exit();
 			} else {
-				header("Location: ../main.php?eguest=guest&error=wrongpwd");
+				header("Location: ../gallery.php?eguest=guest&error=wrongpwd");
 				exit();
 			}
 		} catch (PDOException $e) {
-			header("Location: ../main.php?guest=guest&error=sqlerror");
+			header("Location: ../gallery.php?guest=guest&error=sqlerror");
 			exit();
 		}
 	}
 }
 else
 {
-	header("Location: ../main.php?guest=guest");
+	header("Location: ../gallery.php?guest=guest");
 	exit();
 }

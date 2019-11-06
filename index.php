@@ -1,7 +1,6 @@
 <?php require "header.php"; ?>
 
 <main>
-
 	<div class="center">
 		<div class="logins">
 			<h5>Welcome!</h5>
@@ -33,7 +32,7 @@
 				<button id="login-butt" type="submit" name="login-submit">Login</button><br>
 			</form>
 			<input type="button" class="signup-butt" value="Signup" onclick="location.href='signup.php';"><br>
-			<form action="main.php" method="get">
+			<form action="gallery.php" method="get">
 				<input type="submit" name="guest" value="guest" class="guest-butt">
 			</form>
 		</div>
