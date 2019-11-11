@@ -14,27 +14,54 @@
 			?>
 		<section class="user-info">
 			<div id="pp"></div>
-			<form action="includes/profile.inc.php" method="post">
-				Username: <input type="text" name="username" value="<?php echo $username ?>" readonly><br>
-				Email: <input type="email" name="email" value="<?php echo $email ?>" readonly><br>
-				Password: <input type="password" name="username" value="00000000" readonly><br>
-				<button type="submit" name="update-info">Update info</button>
-			</form>
-			<button onclick="change_field()">Edit information</button>
+				Username: <input type="text" name="username" value="<?php echo $username ?>" disabled><br>
+				Email: <input type="email" name="email" value="<?php echo $email ?>" disabled><br>
+				Password: <input type="password" name="password" value="00000000" disabled><br>
+			<button id="info" onclick="change_field()">Edit information</button>
 		</section>
 	<?php }
 	?>
-
-	<script>
-		function change_field() {
-		$m = document.getElementsByName("username");
-		$p = document.getElementsByName("email");
-			$m.disable = false;
-			$p.disable = false
-		}
-	</script> 
 </main>
+<script>
+	function change_field() {
+		// var user = document.getElementsByName('username');
+		// var mail = document.getElementsByName('email');
+		// var pass = document.getElementsByName('password');
+			// window.close();
 
+			// window.open("","MsgWindow","width=200,height=200");
+			window.open("update.php", "_blank", "left=500,width=500,scrollbars=no,resizable=no,top=500,height=500");
+		// if (document.getElementById('info').innerText.localeCompare("Edit information")) {
+		// 	for (var i = 0; i < user.length; i++) {
+		// 		user[i].disabled = false;
+		// 	}
+		// 	for (var i = 0; i < mail.length; i++) {
+		// 		mail[i].disabled = false;
+		// 	}
+		// 	for (var i = 0; i < pass.length; i++) {
+		// 		pass[i].disabled = false;
+		// 	}
+		// 	document.getElementsByName('pwd-repeat')[i].type = 'text';
+		// 	document.getElementById('info').innerText = "stop";
+		// }
+
+		// if (document.getElementById('info').innerText.localeCompare("stop")) {
+		// 	for (var i = 0; i < user.length; i++) {
+		// 		user[i].disabled = true;
+		// 	}
+		// 	for (var i = 0; i < mail.length; i++) {
+		// 		mail[i].disabled = true;
+		// 	}
+		// 	for (var i = 0; i < pass.length; i++) {
+		// 		pass[i].disabled = true;
+		// 	}
+		// 	for (var i = 0; i < document.getElementsByName('pwd-repeat').length; i++) {
+		// 		document.getElementsByName('pwd-repeat')[i].type = 'text';
+		// 	}
+		// 	document.getElementById('info').innerText = "Edit information";
+		// }
+	}
+</script>
 
 <?php require 'footer.php' ?>
 <!-- 
