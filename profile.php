@@ -14,52 +14,22 @@
 			?>
 		<section class="user-info">
 			<div id="pp"></div>
-				Username: <input type="text" name="username" value="<?php echo $username ?>" disabled><br>
-				Email: <input type="email" name="email" value="<?php echo $email ?>" disabled><br>
+				Username: <input type="text" name="username" value="<?php echo $username; ?>" disabled><br>
+				Email: <input type="email" name="email" value="<?php echo $email; ?>" disabled><br>
 				Password: <input type="password" name="password" value="00000000" disabled><br>
-			<button id="info" onclick="change_field()">Edit information</button>
-		</section>
+				<button id="info" onclick="change_info()">Edit information</button>
+				<button id="info" onclick="change_pwd()">Change password</button>
+			</section>
 	<?php }
 	?>
 </main>
 <script>
-	function change_field() {
-		// var user = document.getElementsByName('username');
-		// var mail = document.getElementsByName('email');
-		// var pass = document.getElementsByName('password');
-			// window.close();
+	function change_info() {
+			window.open("update.php", "_blank", "left=500,width=500,scrollbars=no,resizable=no,top=300,height=500");
+	}
 
-			// window.open("","MsgWindow","width=200,height=200");
-			window.open("update.php", "_blank", "left=500,width=500,scrollbars=no,resizable=no,top=500,height=500");
-		// if (document.getElementById('info').innerText.localeCompare("Edit information")) {
-		// 	for (var i = 0; i < user.length; i++) {
-		// 		user[i].disabled = false;
-		// 	}
-		// 	for (var i = 0; i < mail.length; i++) {
-		// 		mail[i].disabled = false;
-		// 	}
-		// 	for (var i = 0; i < pass.length; i++) {
-		// 		pass[i].disabled = false;
-		// 	}
-		// 	document.getElementsByName('pwd-repeat')[i].type = 'text';
-		// 	document.getElementById('info').innerText = "stop";
-		// }
-
-		// if (document.getElementById('info').innerText.localeCompare("stop")) {
-		// 	for (var i = 0; i < user.length; i++) {
-		// 		user[i].disabled = true;
-		// 	}
-		// 	for (var i = 0; i < mail.length; i++) {
-		// 		mail[i].disabled = true;
-		// 	}
-		// 	for (var i = 0; i < pass.length; i++) {
-		// 		pass[i].disabled = true;
-		// 	}
-		// 	for (var i = 0; i < document.getElementsByName('pwd-repeat').length; i++) {
-		// 		document.getElementsByName('pwd-repeat')[i].type = 'text';
-		// 	}
-		// 	document.getElementById('info').innerText = "Edit information";
-		// }
+	function change_pwd() {
+		window.open("update_password.php", "_blank", "left=500,width=500,scrollbars=no,resizable=no,top=300,height=500");
 	}
 </script>
 

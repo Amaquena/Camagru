@@ -17,13 +17,30 @@
 	?>
 	<section class="user-info">
 		<div id="pp"></div>
-		<form action="includes/profile.inc.php" method="post">
-			Username: <input type="text" name="username" value=" <?php echo "$username"; ?>"><br>
-			Email: <input type="email" name="email" value=" <?php echo "$email"; ?>"><br>
+		<?php
+		if (isset($_GET['error'])) {
+			if ($_GET['error'] == "emptyfields") {
+				echo '<p>Fill in all fields</p>';
+			} else if ($_GET['error'] == "invalidmailuid") {
+				echo '<p>Invalid username & password</p>';
+			} else if ($_GET['error'] == "invalidmail") {
+				echo '<p>Invalid email</p>';
+			} else if ($_GET['error'] == "invaliduid") {
+				echo '<p>Invalid username</p>';
+			} else if ($_GET['error'] == "wrongpwd") {
+				echo '<p>Incorrect password</p>';
+			} else if ($_GET['error'] == "mailtaken") {
+				echo '<p>Email already registered</p>';
+			}
+		}
+		?>
+		<form action="includes/update.inc.php" method="post">
+			Username: <input type="text" name="username" value="<?php echo $username; ?>"><br>
+			Email: <input type="email" name="email" value="<?php echo $email; ?>"><br>
 			Password: <input type="password" name="password" placeholder="Enter to confirm changes"><br>
 			<button type="submit" name="update-info">Update info</button>
 		</form>
-			<!-- Confirm password: <input type="password" name="pwd-repeat" placeholder="Re-enter new password"><br> -->
+		<!-- Confirm password: <input type="password" name="pwd-repeat" placeholder="Re-enter new password"><br> -->
 		<button id="info" onclick="change_field()">close</button>
 	</section>
 

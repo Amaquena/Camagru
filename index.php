@@ -35,6 +35,7 @@
 			<form action="gallery.php" method="get">
 				<input type="submit" name="guest" value="guest" class="guest-butt">
 			</form>
+			<p style="color:#5e4200">Forgot your password? click <a href="forgotten_password.php"> here</a></p>
 		</div>
 	</div>
 	<!-- <script>

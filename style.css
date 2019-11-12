@@ -479,7 +479,7 @@ header p {
 	font-weight: 650;
 }
 
-.logins p {
+.logins p, .user-info p {
 	color: #ff0000;
 	font-style: oblique;
 	font-size: medium;
@@ -564,6 +564,10 @@ header p {
 	background-color: rgba(255, 255, 255, 0.5);
 	width: 300px;
 	margin: 0 auto;
+}
+
+.user-info p {
+	text-align: center;
 }
 
 #pp {
