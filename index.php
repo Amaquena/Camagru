@@ -10,21 +10,22 @@
 					echo '<p>Fill in all fields</p>';
 				} else if ($_GET['error'] == "nouser") {
 					echo '<p>Please sign-up to sign-in</p>';
-				}
-				else if ($_GET['error'] == "wrongpwd") {
+				} else if ($_GET['error'] == "wrongpwd") {
 					echo '<p>Incorrect password</p>';
-				}
-				else if ($_GET['error'] == "nouser") {
+				} else if ($_GET['error'] == "nouser") {
 					echo '<p>Please sign-up to sign-in</p>';
 				} else if ($_GET['error'] == "updatefiles") {
 					echo '<p>Failed to verify account</p>';
 				}
-			}
-			else if ($_GET['success'] == "signup") {
+			} if (isset($_GET['success'])) {
+			if ($_GET['success'] == "signup") {
 				echo '<p id="success">Registered!<br />Verify email to login<p>';
 			} else if ($_GET['success'] == "verified") {
 				echo '<p id="success">Verified!<br />Please login<p>';
+			} else if ($_GET['success'] == "pwdchanged") {
+				echo '<p id="success">Password successfully changed!<br />Please login<p>';
 			}
+		}
 			?>
 			<form action="includes/login.inc.php" method="post">
 				<input id="email" onkeyup="stoppedTyping()" type="text" name="mailuid" placeholder="Username/E-mail"><br>
@@ -38,19 +39,6 @@
 			<p style="color:#5e4200">Forgot your password? click <a href="forgotten_password.php"> here</a></p>
 		</div>
 	</div>
-	<!-- <script>
-		$m = document.getElementById("email");
-		$p = document.getElementById("pwd");
-		
-		function stoppedTyping() {
-			if ($m.value.length > 0 && $p.value.length > 0) {
-				document.getElementById("login-butt").disable = false;
-			} else {
-				document.getElementById("login-butt").disable = true;
-			}
-		}
-	</script> -->
-	<!-- } -->
 </main>
 
 <?php require "footer.php"; ?>

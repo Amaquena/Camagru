@@ -9,12 +9,12 @@
     <div class = "video-wrap"></div>
         <video id="video" playsinline autoplay></video>
     </div>
-
+​
     <!-- Trigger canvas web API -->
     <div class="controller">
         <button id="snap">Capture</button>
     </div>
-
+​
     <!-- Webcam Video Snapshot -->
     <canvas id="canvas" width="640" height="480"></canvas>
 <script>
@@ -53,16 +53,9 @@
     init()
 // Draw image
     var context = canvas.getContext('2d');
-	width = 640;
-			height = 480;
     snap.addEventListener("click", function()
     {
-			capture = 1;
-			context.save();
-			context.scale(-1, 1);
-			context.drawImage(video, 0, 0, width * -1, height);
-			context.restore();
-			saveState(canvas);
+        context.drawImage(video, 0, 0, 640, 480);
     });
 </script>
 </body>

@@ -35,7 +35,7 @@ if (isset($_POST['update-info'])) {
 				header("Location: ../update.php?error=wrongpwd");
 				exit();
 			}
-			if ($count > 1) {
+			if ($count > 0) {
 				header("Location: ../update.php?error=mailtaken&uid=" . $username);
 				exit();
 			}

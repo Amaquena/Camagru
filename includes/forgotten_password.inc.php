@@ -3,8 +3,11 @@ if (isset($_POST['send_mail'])) {
 	include '../config/database.php';
 	$email = $_POST['email'];
 
-	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		header("Location: ../forgetten_password.php?error=invalidmail");
+	if (empty($email)) {
+		header("Location: ../forgotten_password.php?error=emptyfields");
+		exit();
+	} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		header("Location: ../forgotten_password.php?error=invalidmail");
 		exit();
 	} else {
 		try {
@@ -35,11 +38,11 @@ if (isset($_POST['send_mail'])) {
 					header("Location: ../index.php?success=pwdreset");
 					exit();
 				} else {
-					header("Location: ../forgetten_password.php?error=mailerror");
+					header("Location: ../forgotten_password.php?error=mailerror");
 					exit();
 				}
 			} else {
-				header("Location: ../forgetten_password.php?error=noemail");
+				header("Location: ../forgotten_password.php?error=noemail");
 				exit();
 			}
 		} catch (PDOException $e) {
@@ -49,33 +52,34 @@ if (isset($_POST['send_mail'])) {
 } else if (isset($_POST['reset-submit'])) {
 	include '../config/database.php';
 
+	$code = $_POST['code'];
 	$user_id = intval(base64_decode(($_POST['code'])));
 	$pwd = $_POST['pwd'];
 	$pwd_repeat = $_POST['pwd-repeat'];
 
-	if (empty($pwd) || empty($pwd_repeat)) { 
-		header("Location: ../forgetten_password.php?error=emptyfields");
+	if (empty($pwd) || empty($pwd_repeat)) {
+		header("Location: ../forgotten_password.php?error=emptyfields&code=" . $code);
 		exit();
 	} else if ((strlen($pwd) < 8)) {
-		header("Location: ../forgetten_password.php?error=pwdshort");
+		header("Location: ../forgotten_password.php?error=pwdshort&code=" . $code);
 		exit();
 	} else if (!preg_match('/[A-Z]/', $pwd)) {
-		header("Location: ../forgetten_password.php?error=pwdnocap");
+		header("Location: ../forgotten_password.php?error=pwdnocap&code=" . $code);
 		exit();
 	} else if (!preg_match('/[a-z]/', $pwd)) {
-		header("Location: ../forgetten_password.php?error=pwdnolow");
+		header("Location: ../forgotten_password.php?error=pwdnolow&code=" . $code);
 		exit();
 	} else if (!preg_match("/[!@#$%^&*()-=`~_+,.\/<>?:;\|]/", $pwd)) {
-		header("Location: ../forgetten_password.php?error=pwdnospchar");
+		header("Location: ../forgotten_password.php?error=pwdnospchar&code=" . $code);
 		exit();
 	} else if (!preg_match('/[0-9]/', $pwd)) {
-		header("Location: ../forgetten_password.php?error=nodigit");
+		header("Location: ../forgotten_password.php?error=nodigit&code=" . $code);
 		exit();
 	} else if (strstr($pwd, ' ')) {
-		header("Location: ../forgetten_password.php?error=pwdspace");
+		header("Location: ../forgotten_password.php?error=pwdspace&code=" . $code);
 		exit();
 	} else if ($pwd !== $pwd_repeat) {
-		header("Location: ../forgetten_password.php?error=pwdcheck");
+		header("Location: ../forgotten_password.php?error=pwdcheck&code=" . $code);
 		exit();
 	} else {
 		try {
@@ -84,14 +88,11 @@ if (isset($_POST['send_mail'])) {
 			$hashed = password_hash($pwd, PASSWORD_DEFAULT);
 			$stmt->bindParam(1, $hashed);
 			$stmt->bindParam(2, $user_id);
-			
-			if ($stmt->execute())
-			{
+
+			if ($stmt->execute()) {
 				header("Location: ../index.php?success=pwdchanged");
 				exit();
 			}
-
-
 		} catch (PDOException $e) {
 			echo $e->getMessage();
 		}
