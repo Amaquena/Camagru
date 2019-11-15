@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+    <title>Webcam</title>
+</head>
+<body>
+    
+    <!-- Stream video via Webcam -->
+    <div class = "video-wrap"></div>
+        <video id="video" playsinline autoplay></video>
+    </div>
+
+    <!-- Trigger canvas web API -->
+    <div class="controller">
+        <button id="snap">Capture</button>
+    </div>
+
+    <!-- Webcam Video Snapshot -->
+    <canvas id="canvas" width="640" height="480"></canvas>
+<script>
+    'use strict';
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const snap = document.getElementById('snap');
+    const errorMsgElement = document.getElementById('span#ErrorMsg');
+    const constraints = 
+    {
+        audio: false,
+        video:
+        {
+            width: 1280, height: 720
+        }
+    };
+// Access webcam
+    async function init ()
+    {
+        try{
+            const stream = await navigator.mediaDevices.getUserMedia(constraints);
+            handleSuccess(stream);
+        }
+        catch(e)
+        {
+            errorMsgElement.innerHTML = `navigator.getUserMedia.error:${e.toString()}`;
+        }
+    }
+//Success
+    function handleSuccess(stream)
+    {
+        window.stream = stream
+        video.srcObject = stream;
+    }
+// Load init
+    init()
+// Draw image
+    var context = canvas.getContext('2d');
+	width = 640;
+			height = 480;
+    snap.addEventListener("click", function()
+    {
+			capture = 1;
+			context.save();
+			context.scale(-1, 1);
+			context.drawImage(video, 0, 0, width * -1, height);
+			context.restore();
+			saveState(canvas);
+    });
+</script>
+</body>

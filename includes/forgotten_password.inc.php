@@ -7,26 +7,93 @@ if (isset($_POST['send_mail'])) {
 		header("Location: ../forgetten_password.php?error=invalidmail");
 		exit();
 	} else {
-		$sql = "SELECT * FROM `users` WHERE email = :mail";
-		$stmt = $conn->prepare($sql);
-		$stmt->bindParam(":mail", $email);
-		$stmt->execute();
+		try {
+			$sql = "SELECT * FROM `users` WHERE email = :mail";
+			$stmt = $conn->prepare($sql);
+			$stmt->bindParam(":mail", $email);
+			$stmt->execute();
+			$count = $stmt->rowCount();
+			if ($count > 0) {
+				$result = $stmt->fetch(PDO::FETCH_ASSOC);
+				$user_id = $result['user_id'];
+				$username = $result['username'];
 
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		$user_id = $result['user_id'];
-		$username = $result['username'];
-
-		$to = $email;
-		$url = "http://localhost:8081/camagru/includes/update.inc.php?code=" . base64_encode($user_id);
-		$msg = "
+				$to = $email;
+				$subject = "Reset password";
+				$url = "http://localhost:8081/camagru/forgotten_password.php?code=" . base64_encode($user_id);
+				$msg = "
 		<p>Hi $username,</p>
 		<p>Click the link below to change password<br /><br /></p>
-		<p>$verificationlink</p>
+		<p>$url</p>
 		<p>From,<br /> Bear</p>
 		";
 
-		$headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
+				$headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
+				$headers .= 'From: Bear <no-reply@superposable.com>' . "\r\n";
 
-		$headers .= 'From: Bear <no-reply@superposable.com>' . "\r\n";
+				if (mail($to, $subject, $msg, $headers)) {
+					header("Location: ../index.php?success=pwdreset");
+					exit();
+				} else {
+					header("Location: ../forgetten_password.php?error=mailerror");
+					exit();
+				}
+			} else {
+				header("Location: ../forgetten_password.php?error=noemail");
+				exit();
+			}
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+		}
+	}
+} else if (isset($_POST['reset-submit'])) {
+	include '../config/database.php';
+
+	$user_id = intval(base64_decode(($_POST['code'])));
+	$pwd = $_POST['pwd'];
+	$pwd_repeat = $_POST['pwd-repeat'];
+
+	if (empty($pwd) || empty($pwd_repeat)) { 
+		header("Location: ../forgetten_password.php?error=emptyfields");
+		exit();
+	} else if ((strlen($pwd) < 8)) {
+		header("Location: ../forgetten_password.php?error=pwdshort");
+		exit();
+	} else if (!preg_match('/[A-Z]/', $pwd)) {
+		header("Location: ../forgetten_password.php?error=pwdnocap");
+		exit();
+	} else if (!preg_match('/[a-z]/', $pwd)) {
+		header("Location: ../forgetten_password.php?error=pwdnolow");
+		exit();
+	} else if (!preg_match("/[!@#$%^&*()-=`~_+,.\/<>?:;\|]/", $pwd)) {
+		header("Location: ../forgetten_password.php?error=pwdnospchar");
+		exit();
+	} else if (!preg_match('/[0-9]/', $pwd)) {
+		header("Location: ../forgetten_password.php?error=nodigit");
+		exit();
+	} else if (strstr($pwd, ' ')) {
+		header("Location: ../forgetten_password.php?error=pwdspace");
+		exit();
+	} else if ($pwd !== $pwd_repeat) {
+		header("Location: ../forgetten_password.php?error=pwdcheck");
+		exit();
+	} else {
+		try {
+			$sql = "UPDATE `users` SET `password` = ? WHERE `user_id` = ?";
+			$stmt = $conn->prepare($sql);
+			$hashed = password_hash($pwd, PASSWORD_DEFAULT);
+			$stmt->bindParam(1, $hashed);
+			$stmt->bindParam(2, $user_id);
+			
+			if ($stmt->execute())
+			{
+				header("Location: ../index.php?success=pwdchanged");
+				exit();
+			}
+
+
+		} catch (PDOException $e) {
+			echo $e->getMessage();
+		}
 	}
 }
