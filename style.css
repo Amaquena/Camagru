@@ -594,15 +594,22 @@ header p {
 .item2 { grid-area: webcam; }
 .item3 { grid-area: gal; }
 .item4 { grid-area: snap; }
+.item5 { grid-area: form; }
 
 .grid-container {
   display: grid;
   grid-template-areas:
 	'stickers webcam gal'
-	'stickers snap gal';
+	'stickers snap gal'
+	'stickers form gal';
   grid-gap: 10px;
   background-color: #2196F3;
   padding: 10px;
+}
+
+.item1 img {
+	height: 50px;
+	width: 50px;
 }
 
 .grid-container > div {
@@ -611,22 +618,6 @@ header p {
 
   font-size: 30px;
 } 
-/* .grid {
-	background-color: black;
-	display: grid;
-	grid-template:
-	'stickers blank webcam webcam blank side-gallary'
-	'stickers blank webcam webcam blank side-gallary'
-	'stickers blank webcam webcam blank side-gallary';
-}
-
-.grid div {
-	background-color: red;
-}
-.item1 { grid-area: stickers; }
-.item2 { grid-area: webcam; }
-.item3 { grid-area: side-gallary; }
-.item4 { grid-area: blank; } */
 
 /*####################### Gallery style ##############################*/
 .grid {
