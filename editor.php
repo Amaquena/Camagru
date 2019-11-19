@@ -1,54 +1,46 @@
-<?php require 'header.php' ?>
+<?php
+require 'header.php';
+include 'functions/get_images.php';
+?>
 
 <main>
 	<?php
 	if ($_SESSION['verify'] == 0) {
 		echo '<h2 id="verify-tag">Verify account to access Editor page</h2>';
 	} else {
+		$images = get_images();
 		?>
-		<!-- <div class="grid">
-			<div class="item1"></div>
-			<div class="item2"></div>
-			<div class="item3"></div>
-			<div class="item4"></div>
-		</div> -->
-
 		<div class="grid-container">
 			<div class="item1">
-				<!-- <select>
-					<option value="stickers/doggo1">doggo1</option>
-					<option value="stickers/frame1">frame1</option>
-					<option value="stickers/frame2">frame2</option>
-					<option value="stickers/frame3">frame3</option>
-					<option value="stickers/frame4">frame4</option>
-					<option value="stickers/frame5">frame5</option>
-					<option value="stickers/frame6">frame6</option>
-					<option value="stickers/frame7">frame7</option>
-					<option value="stickers/frame8">frame8</option>
-					<option value="stickers/frame9">frame9</option>
-					<option value="stickers/frame10">frame10</option>
-					<option value="stickers/frame11">frame11</option>
-					<option value="stickers/frame12">frame12</option>
-					<option value="stickers/frame13">frame13</option>
-				</select> -->
-				<?php
-					$dirname = "stickers/";
-					$images = glob($dirname . "*.png");
 
-					foreach ($images as $image) {
-						echo '<a href="#"><img src="' . $image . '" /></a><br />';
-					}
-					?>
+				<!-- <img class="frame" src="./stickers/doggo1.png" onclick="merge('./stickers/doggo1.png')"><br /> -->
+				<img class="frame" src="./stickers/frame1.png" onclick="merge('./stickers/frame1.png')"><br />
+				<img class="frame" src="./stickers/frame2.png" onclick="merge('./stickers/frame2.png')"><br />
+				<img class="frame" src="./stickers/frame3.png" onclick="merge('./stickers/frame3.png')"><br />
+				<img class="frame" src="./stickers/frame4.png" onclick="merge('./stickers/frame4.png')"><br />
+				<img class="frame" src="./stickers/frame5.png" onclick="merge('./stickers/frame5.png')"><br />
+				<img class="frame" src="./stickers/frame6.png" onclick="merge('./stickers/frame6.png')"><br />
+				<img class="frame" src="./stickers/frame7.png" onclick="merge('./stickers/frame7.png')"><br />
+				<img class="frame" src="./stickers/frame8.png" onclick="merge('./stickers/frame8.png')"><br />
+				<img class="frame" src="./stickers/frame9.png" onclick="merge('./stickers/frame9.png')"><br />
+				<img class="frame" src="./stickers/frame10.png" onclick="merge('./stickers/frame10.png')"><br />
+				<img class="frame" src="./stickers/frame11.png" onclick="merge('./stickers/frame11.png')"><br />
+				<img class="frame" src="./stickers/frame12.png" onclick="merge('./stickers/frame12.png')"><br />
+				<img class="frame" src="./stickers/frame13.png" onclick="merge('./stickers/frame13.png')"><br />
 			</div>
 			<div class="item2">
-				<video id="video" autoplay></video>
-				<button id="snap">capture</button>
+				<video id="video" autoplay></video><br />
+				<button id="snap">Snap</button>
 			</div>
 			<div class="item3">
+				<img src="<?php echo $images[1]; ?>" />
 			</div>
 			<div class="item4">
-				<canvas id="canvas" width="640" height="480"></canvas>
-				<button id="upload" onclick="save_image()">Upload</button>
+				<form action="includes/image_save.inc.php" method="post">
+					<canvas style="background-color:bisque" id="canvas" width="320" height="240"></canvas><br />
+					<button id="upload" type="submit" name="upload" onclick="save_image()">Upload</button>
+				</form>
+				<button id="clear" onclick="clear()">Clear</button>
 			</div>
 			<div class="item5">
 				<form enctype="multipart/form-data" method="post" name="changer">

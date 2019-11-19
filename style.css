@@ -617,7 +617,11 @@ header p {
   text-align: center;
 
   font-size: 30px;
-} 
+}
+
+#canvas {
+
+}
 
 /*####################### Gallery style ##############################*/
 .grid {

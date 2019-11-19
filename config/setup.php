@@ -26,7 +26,7 @@ try {
 	// create image table
 	$sql = "CREATE TABLE IF NOT EXISTS `images`(
 		`image_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-		`image_src` TINYTEXT NOT NULL,
+		`image_src` LONGBLOB NOT NULL,
 		`user_id` INT(11),
 		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
 		);";
