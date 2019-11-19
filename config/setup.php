@@ -2,10 +2,10 @@
 
 try {
 
-	$conn = new PDO("mysql:host=localhost", "root", "admins");
+	$conn = new PDO("mysql:host=localhost", "root", "root");
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // sql to create database
+	// sql to create database
 	$sql = "CREATE DATABASE IF NOT EXISTS camagru;";
 	$conn->exec($sql);
 	$conn = null;
@@ -26,7 +26,7 @@ try {
 	// create image table
 	$sql = "CREATE TABLE IF NOT EXISTS `images`(
 		`image_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
-		`image_src` LONGBLOB NOT NULL,
+		`image_src` TEXT NOT NULL,
 		`user_id` INT(11),
 		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
 		);";
@@ -42,10 +42,8 @@ try {
 		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`)
 		);";
 	$conn->exec($sql);
+	echo "successfully created database and tables";
+} catch (PDOException $e) {
+	echo $sql . "<br>" . $e->getMessage();
 }
-catch(PDOException $e) {
-    	echo $sql . "<br>" . $e->getMessage();
-}
-
 $conn = null;
-?>

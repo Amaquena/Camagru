@@ -43,9 +43,9 @@ include 'functions/get_images.php';
 				<button id="clear" onclick="clear()">Clear</button>
 			</div>
 			<div class="item5">
-				<form enctype="multipart/form-data" method="post" name="changer">
-					<input name="image" accept="image/jpeg" type="file">
-					<input value="Submit" type="button">
+				<form enctype="multipart/form-data">
+					<input id="file" name="image" accept="image/jpeg" type="file" onclick="load_image()>
+					<input value=" submit-now" type="button">
 				</form>
 			</div>
 		</div>
@@ -53,7 +53,7 @@ include 'functions/get_images.php';
 	}
 	?>
 
-	<script type="text/javascript" async src="functions/webcam.js"></script>
+	<script type=" text/javascript" async src="functions/webcam.js"></script>
 </main>
 
 
