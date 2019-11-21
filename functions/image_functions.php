@@ -3,9 +3,10 @@
 function get_images()
 {
 	try {
-		$conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "root");
+		$conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "admins");
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+		// include '../config/database.php';
 
 		$user_id = $_SESSION['userId'];
 

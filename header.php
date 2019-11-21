@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'user_functions/js_scripts.js';
 ?>
 
 <!DOCTYPE html>

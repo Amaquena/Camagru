@@ -1,6 +1,6 @@
 <?php
 require 'header.php';
-include 'functions/get_images.php';
+include 'functions/image_functions.php';
 ?>
 
 <main>
@@ -9,6 +9,8 @@ include 'functions/get_images.php';
 		echo '<h2 id="verify-tag">Verify account to access Editor page</h2>';
 	} else {
 		$images = get_images();
+		$array_size = count($images);
+		$i = 0;
 		?>
 		<div class="grid-container">
 			<div class="item1">
@@ -30,22 +32,23 @@ include 'functions/get_images.php';
 			</div>
 			<div class="item2">
 				<video id="video" autoplay></video><br />
-				<button id="snap">Snap</button>
+				<button onclick="save()" id="snap">Snap</button>
 			</div>
 			<div class="item3">
-				<img src="<?php echo $images[1]; ?>" />
+				<?php while ($i < $array_size)  {?>
+					<a href="<?php echo $images[$i]; ?>"><img src="<?php echo $images[$i]; ?>" /></a>
+				<?php $i++; } ?>
 			</div>
 			<div class="item4">
 				<form action="includes/image_save.inc.php" method="post">
 					<canvas style="background-color:bisque" id="canvas" width="320" height="240"></canvas><br />
 					<button id="upload" type="submit" name="upload" onclick="save_image()">Upload</button>
 				</form>
-				<button id="clear" onclick="clear()">Clear</button>
+				<button id="clear" onclick="load()">Clear</button>
 			</div>
 			<div class="item5">
 				<form enctype="multipart/form-data">
-					<input id="file" name="image" accept="image/jpeg" type="file" onclick="load_image()>
-					<input value=" submit-now" type="button">
+					<input id="file" name="image" accept="image" type="file" onclick="load_image()">
 				</form>
 			</div>
 		</div>
@@ -53,8 +56,8 @@ include 'functions/get_images.php';
 	}
 	?>
 
-	<script type=" text/javascript" async src="functions/webcam.js"></script>
+	<script type="text/javascript" async src="functions/webcam.js"></script>
 </main>
 
 
-<?php require 'footer.php' ?>
+<!-- <?php require 'footer.php' ?> -->

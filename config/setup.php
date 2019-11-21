@@ -2,7 +2,7 @@
 
 try {
 
-	$conn = new PDO("mysql:host=localhost", "root", "root");
+	$conn = new PDO("mysql:host=localhost", "root", "admins");
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	// sql to create database

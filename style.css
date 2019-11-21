@@ -580,6 +580,13 @@ header p {
 	border-radius: 10px;
 }
 
+.user-images {
+	background-color: burlywood;
+	width: 300px;
+	height: 300px;
+	margin: 20px auto 0;
+}
+
 /* ###################### Editor style ##########################  */
 
 #verify-tag {
@@ -619,8 +626,9 @@ header p {
   font-size: 30px;
 }
 
-#canvas {
-
+.grid-container > .item3 > a > img {
+	width: 100px;
+	height: 100px;
 }
 
 /*####################### Gallery style ##############################*/
