@@ -13,13 +13,13 @@ session_start();
 
 </head>
 <header>
-	<div id="logo"></div>
+	<div onclick="window.location.href='gallery.php?page=1.php'" id="logo"></div>
 	<?php
 	if (isset($_SESSION['userId'])) { ?>
 		<nav>
 		<ul class="nav-links">
 			<li><a href="profile.php">profile</a></li>
-			<li><a href="gallery.php">gallery</a></li>
+			<li><a href="gallery.php?page=1">gallery</a></li>
 			<li><a href="editor.php">editor</a></li>
 		</ul>
 	</nav>
@@ -29,8 +29,7 @@ session_start();
 			<button id="logout-butt" type="submit" name="logout-submit">Logout</button>
 		</form>
 	</div> <?php
-	}
-	if (isset($_GET['guest'])) { ?>
+	} else { ?>
 		<div class="nav-input">
 		<form action="includes/login.inc.php" method="post">
 		<input type="text" name="mailuid" placeholder="Username/E-mail">

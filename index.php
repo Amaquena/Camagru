@@ -28,14 +28,14 @@
 		}
 			?>
 			<form action="includes/login.inc.php" method="post">
-				<input id="email" onkeyup="stoppedTyping()" type="text" name="mailuid" placeholder="Username/E-mail"><br>
-				<input id="pwd" onkeyup="stoppedTyping()" type="password" name="pwd" placeholder="Password"><br>
-				<button id="login-butt" type="submit" name="login-submit">Login</button><br>
+				<input id="email" type="text" name="mailuid" placeholder="Username/E-mail"><br>
+				<input id="pwd" type="password" name="pwd" placeholder="Password"><br>
+				<button class="login-butt" type="submit" name="login-submit">Login</button><br>
 			</form>
 			<input type="button" class="signup-butt" value="Signup" onclick="location.href='signup.php';"><br>
-			<form action="gallery.php" method="get">
-				<input type="submit" name="guest" value="guest" class="guest-butt">
-			</form>
+			<!-- <form action="gallery.php" method="get"> -->
+				<input onclick="window.location.href='gallery.php?page=1.php'" type="submit" name="guest" value="guest" class="guest-butt">
+			<!-- </form> -->
 			<p style="color:#5e4200">Forgot your password? click <a href="forgotten_password.php"> here</a></p>
 		</div>
 	</div>

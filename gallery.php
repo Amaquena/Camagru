@@ -2,20 +2,54 @@
 
 <main>
 	<?php
-	if (!$_SESSION && !$_GET['guest'])
-	{
-		header("Location: index.php");
-		exit();
-	}
+	// if (!$_SESSION && !$_GET['guest']) {
+	// 	header("Location: index.php");
+	// 	exit();
+	// } else {
 	?>
+	<?php
+	include 'functions/php_functions.php';
+	$usernames = get_userid_images();
+	$images = get_images();
+	$img_count = count($images);
+	$max_pages = ceil($img_count / 6);
+
+	$page = intval($_GET['page']);
+	$i = ($page * 6) - 6;
+	?>
+
 	<body>
 		<div class="gallery">
 			<h2>Gallery</h2>
-			<div>1</div>
-			<div>2</div>
-			<div>3</div>
-			<div>4</div>
-		</div>
+			<div class="gall-images">
+				<?php
+				$count = 0;
+				while ($count < 6) {
+					if (isset($images[$i])) { ?>
+						<p>posted by: <?php echo $usernames[$i]; ?></p>
+						<?php
+								$loc = "comments.php?image=" . $images[$i];
+								?>
+						<img onclick="window.location.href='<?php echo $loc; ?>'" src="<?php echo $images[$i]; ?>">
+						
+				<?php }
+					$count++;
+					$i++;
+				} ?>
+			</div>
+			<?php if (intval($_GET["page"]) != 1) { ?>
+				<div class="prev" onclick="<?php $page = intval($_GET["page"]) - 1;
+												$loc = "gallery.php?page=" . $page; ?>window.location.href='<?php echo $loc; ?>'">
+					<h1>PREV</h1>
+				</div>
+			<?php }
+			if (intval($_GET["page"]) != $max_pages) { ?>
+				<div class="next" onclick="<?php $page = intval($_GET["page"]) + 1;
+												$loc = "gallery.php?page=" . $page; ?>window.location.href='<?php echo $loc; ?>'">
+					<h1>NEXT</h1>
+				</di v>
+			<?php } ?>
+
 	</body>
 </main>
 

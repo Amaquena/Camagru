@@ -1,11 +1,11 @@
 <?php
-// $servername = "localhost";
-// $dbUsername = "root";
-// $dbpwd = "admins";
-// $dbName = "camagru_users";
+$DB_DSN =  "camagru";
+$DB_USER = "root";
+$DB_PASSWORD = "admins";
 
 try {
-	$conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "admins");
+	// $conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "admins");
+	$conn = new PDO("mysql:host=localhost;dbname=". $DB_DSN .";", $DB_USER , $DB_PASSWORD);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 	// insert data into the users table of the database using PDO

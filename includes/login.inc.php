@@ -31,7 +31,7 @@ if (isset($_POST['login-submit'])) {
 				$_SESSION['pp_src'] = $result['pp_src'];
 				$_SESSION['verify'] = $result['verified'];
 				$_SESSION['email'] = $result['email'];
-				header("Location: ../gallery.php");
+				header("Location: ../gallery.php?page=1");
 				exit();
 			} else {
 				header("Location: ../index.php?error=wrongpwd");
@@ -84,7 +84,7 @@ else if (isset($_POST['guest-login-submit']))
 				$_SESSION['pp_src'] = $result['pp_src'];
 				$_SESSION['verify'] = $result['verified'];
 				$_SESSION['email'] = $result['email'];
-				header("Location: ../gallery.php");
+				header("Location: ../gallery.php?page=1");
 				exit();
 			} else {
 				header("Location: ../gallery.php?eguest=guest&error=wrongpwd");

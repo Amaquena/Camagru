@@ -22,7 +22,6 @@ navigator.mediaDevices
 // Draw image of webcam on canvas
 snap.addEventListener("click", function () {
   ctx.drawImage(video, 0, 0, width, height);
-  // ctx.save();
   save();
 });
 
@@ -40,7 +39,7 @@ function merge(url) {
 // Save image Data into button value
 function save_image() {
   var img = new Image();
-  img.src = canvas.toDataURL("image/jpeg", 1.0);
+  img.src = canvas.toDataURL();
   var btn = document.getElementById("upload");
   btn.value = img.src;
 }

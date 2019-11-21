@@ -1,6 +1,6 @@
 <?php
 require 'header.php';
-include 'functions/image_functions.php';
+include 'functions/php_functions.php';
 ?>
 
 <main>
@@ -10,7 +10,7 @@ include 'functions/image_functions.php';
 		exit();
 	} else { ?>
 		<?php
-			$images = get_images();
+			$images = get_user_images();
 			$array_size = count($images);
 			$i = 0;
 			$username = $_SESSION['username'];

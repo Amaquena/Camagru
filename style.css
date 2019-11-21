@@ -497,7 +497,7 @@ header p {
 	margin: 4% 0;
 }
 
-.logins #login-butt {
+.logins .login-butt {
 	background-color: rgb(0, 106, 255);
 	/* font-size: 1.5vw; */
 	font-family: Arial, Helvetica, sans-serif;
@@ -549,10 +549,20 @@ header p {
 
 }
 
-.gallery h2 {
+.gall-images > p {
+	text-transform: capitalize;
 }
 
-.gallery div {
+.gallery h2 {
+	text-align: center;
+}
+.prev {
+	float: left;
+}
+.next {
+	float: right;
+}
+.gallery img {
 	margin: 20px;
 	height: 220px;
 	background-color: #ccc;
@@ -581,13 +591,20 @@ header p {
 }
 
 .user-images {
-	background-color: burlywood;
 	width: 300px;
-	height: 300px;
 	margin: 20px auto 0;
 }
 
 /* ###################### Editor style ##########################  */
+
+.editor-wrapper > h2{
+	text-transform: uppercase;
+	font-size: xx-large;
+	text-align: center;
+	color: rgb(60, 47, 153);
+	font-weight: 700;
+	font-family: monospace;
+}
 
 #verify-tag {
 	color: #5e4200;
@@ -604,31 +621,74 @@ header p {
 .item5 { grid-area: form; }
 
 .grid-container {
-  display: grid;
-  grid-template-areas:
-	'stickers webcam gal'
-	'stickers snap gal'
-	'stickers form gal';
-  grid-gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
+	display: grid;
+	grid-template-rows: fit-content(40%);
+	grid-template-areas:
+	'stickers webcam'
+	'stickers snap'
+	'. form'
+	'. gal';
+	grid-gap: 5px;
+	background-color: #2196F3;
+	padding: 5px;
+}
+
+#canvas {
+	background-image: url("images/default-user-image.png");
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .item1 img {
-	height: 50px;
-	width: 50px;
+	height: 40px;
+	width: 40px;
 }
 
 .grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-
-  font-size: 30px;
+	background-color: rgba(255, 255, 255, 0.8);
+	text-align: center;
 }
 
 .grid-container > .item3 > a > img {
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
+}
+
+.grid-container button {
+	/* font-size: 30px; */
+	border: #ccc solid 1px;
+	color:#000;
+}
+
+.grid-container button:hover {
+	background-color: rgba(73, 214, 252,0.2);
+}
+
+.file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.file + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+	background-color: rgb(95, 74, 255);
+	border: #ccc solid 1px;
+    display: inline-block;
+}
+
+.file:focus + label,
+.file + label:hover {
+    background-color: red;
+}
+
+.file + label {
+	cursor: pointer; /* "hand" cursor */
 }
 
 /*####################### Gallery style ##############################*/
@@ -647,15 +707,19 @@ header p {
 /* ###############################################################  */
 /*########################### Footer Style ##############################*/
 footer {
-	position: fixed;
-	bottom: 3%;
-	left: 5%;
-	right: 5%;
+	position: relative;
+	bottom: 0;
+	/* left: 5%;
+	right: 5%; */
+	padding-bottom: 20px;
+	clear:both;
 }
 
 footer h2 {
-	float: right;
+	text-align: center;
 	font-style: italic;
+	line-height: 20px;
+	font-family: fantasy;
 }
 /*########################### Portalable styling ####################*/
 
@@ -717,6 +781,18 @@ footer h2 {
 	#verify-tag {
 		font-size: x-large;
 	}
+
+	.grid-container {
+		display: grid;
+		grid-template-columns: 100px 1fr 1fr;
+		grid-template-areas:
+			'stickers webcam gal'
+			'stickers snap gal'
+			'stickers form gal';
+		grid-gap: 10px;
+		background-color: #2196F3;
+		padding: 10px;
+	}
 }
 
 @media only screen and (min-width: 1000px) {
@@ -742,5 +818,10 @@ footer h2 {
 
 	#verify-tag {
 		font-size: xx-large;
+	}
+
+	.editor-wrapper {
+		width: 1000px;
+		margin: 0 auto;
 	}
 }
