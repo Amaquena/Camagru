@@ -732,7 +732,23 @@ header p {
 .grid div:nth-child(odd) {
 	background-color: beige;
 }
-/* ###############################################################  */
+/*########################### Comment page Style ##############################*/
+
+.comment-image { grid-area: image; }
+.comment-section { grid-area: comments; }
+
+.comment-grid {
+	display: grid;
+	grid-template-rows: fit-content(40%);
+	/* grid-template-columns: repeat(2, 1fr); */
+	grid-template-areas:
+		'image'
+		'comments';
+	grid-gap: 10px;
+	background-color: orange;
+	padding: 10px;
+}
+
 /*########################### Footer Style ##############################*/
 footer {
 	position: relative;

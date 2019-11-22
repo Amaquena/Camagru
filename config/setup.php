@@ -42,6 +42,14 @@ try {
 		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`)
 		);";
 	$conn->exec($sql);
+
+	$sql = "CREATE TABLE IF NOT EXISTS `likes`(
+		`like_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+		`like` int(11) DEFAULT 0 NOT NULL,
+		`image_id` INT(11),
+		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`)
+		);";
+	$conn->exec($sql);
 	$conn = null;
 } catch (PDOException $e) {
 	echo $sql . "<br>" . $e->getMessage();

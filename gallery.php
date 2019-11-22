@@ -2,15 +2,16 @@
 
 <main>
 	<?php
-	// if (!$_SESSION && !$_GET['guest']) {
-	// 	header("Location: index.php");
-	// 	exit();
-	// } else {
+	if (!$_GET) {
+		header("Location: index.php");
+		exit();
+	} else {
 	?>
 	<?php
 	include 'functions/php_functions.php';
-	$usernames = get_userid_images();
-	$images = get_images();
+	$usernames = get_username_images();
+	$images = get_images(0);
+	$images_id = get_images(1);
 	$img_count = count($images);
 	$max_pages = ceil($img_count / 6);
 
@@ -28,7 +29,7 @@
 					if (isset($images[$i])) { ?>
 						<p>posted by: <?php echo $usernames[$i]; ?></p>
 						<?php
-								$loc = "comments.php?image=" . $images[$i];
+								$loc = "comments.php?image=" . $images[$i] . "&id=" . $images_id[$i];
 								?>
 						<img onclick="window.location.href='<?php echo $loc; ?>'" src="<?php echo $images[$i]; ?>">
 						
@@ -48,7 +49,9 @@
 												$loc = "gallery.php?page=" . $page; ?>window.location.href='<?php echo $loc; ?>'">
 					<h1>NEXT</h1>
 				</di v>
-			<?php } ?>
+			<?php } 
+	}
+			?>
 
 	</body>
 </main>

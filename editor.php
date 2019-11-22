@@ -5,10 +5,15 @@ include 'functions/php_functions.php';
 
 <main>
 	<?php
-	if ($_SESSION['verify'] == 0) {
+		if (!$_SESSION) {
+			header("Location: index.php");
+			exit();
+		}
+	else if ($_SESSION['verify'] == 0) {
 		echo '<h2 id="verify-tag">Verify account to access Editor page</h2>';
+		exit();
 	} else {
-		$images = get_user_images();
+		$images = get_user_images(0);
 		$array_size = count($images);
 		$i = 0;
 		?>
