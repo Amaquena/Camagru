@@ -42,7 +42,7 @@ try {
 		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`)
 		);";
 	$conn->exec($sql);
-	echo "successfully created database and tables";
+	$conn = null;
 } catch (PDOException $e) {
 	echo $sql . "<br>" . $e->getMessage();
 }

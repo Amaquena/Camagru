@@ -1,6 +1,6 @@
 <?php
 
-function get_user_images()
+function get_user_images($coll)
 {
 	try {
 		$conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "admins");
@@ -10,12 +10,12 @@ function get_user_images()
 
 		$user_id = $_SESSION['userId'];
 
-		$sql = "SELECT `image_src` FROM `images` WHERE `user_id` = ?";
+		$sql = "SELECT `image_src`, `image_id` FROM `images` WHERE `user_id` = ?";
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(1, $user_id);
 		$stmt->execute();
 
-		$res = $stmt->fetchAll(PDO::FETCH_COLUMN);
+		$res = $stmt->fetchAll(PDO::FETCH_COLUMN, $coll);
 		return ($res);
 	} catch (PDOException $e) {
 		echo $e->getMessage();

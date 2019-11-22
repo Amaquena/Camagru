@@ -3,10 +3,9 @@ session_start();
 require '../config/database.php';
 
 if (isset($_POST['update-info'])) {
-	$username = $_POST['username'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	// $pwd_repeat = $_POST['pwd-repeat'];
+	$username = htmlspecialchars($_POST['username']);
+	$email = htmlspecialchars($_POST['email']);
+	$password = htmlspecialchars($_POST['password']);
 	$user_id = $_SESSION['userId'];
 
 	if (empty($username) || empty($email) || empty($password)) {
@@ -56,9 +55,9 @@ if (isset($_POST['update-info'])) {
 		}
 	}
 } else if (isset($_POST['update-pass'])) {
-	$pwd_current = $_POST['pwd-current'];
-	$password = $_POST['password'];
-	$pwd_repeat = $_POST['pwd-repeat'];
+	$pwd_current = htmlspecialchars($_POST['pwd-current']);
+	$password = htmlspecialchars($_POST['password']);
+	$pwd_repeat = htmlspecialchars($_POST['pwd-repeat']);
 	$user_id = $_SESSION['userId'];
 
 	if (empty($password) || empty($pwd_repeat) || empty($pwd_current)) {

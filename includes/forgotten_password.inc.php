@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['send_mail'])) {
 	include '../config/database.php';
-	$email = $_POST['email'];
+	$email = htmlspecialchars($_POST['email']);
 
 	if (empty($email)) {
 		header("Location: ../forgotten_password.php?error=emptyfields");
@@ -54,8 +54,8 @@ if (isset($_POST['send_mail'])) {
 
 	$code = $_POST['code'];
 	$user_id = intval(base64_decode(($_POST['code'])));
-	$pwd = $_POST['pwd'];
-	$pwd_repeat = $_POST['pwd-repeat'];
+	$pwd = htmlspecialchars($_POST['pwd']);
+	$pwd_repeat = htmlspecialchars($_POST['pwd-repeat']);
 
 	if (empty($pwd) || empty($pwd_repeat)) {
 		header("Location: ../forgotten_password.php?error=emptyfields&code=" . $code);

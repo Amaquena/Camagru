@@ -590,9 +590,31 @@ header p {
 	border-radius: 10px;
 }
 
+
 .user-images {
 	width: 300px;
 	margin: 20px auto 0;
+}
+
+.user-images span{
+	font-size: xx-large;
+	color: white;
+	position: absolute;
+	margin-top: -245px;
+	margin-left: 290px;
+	cursor: pointer;
+}
+
+.user-images span:hover {
+	color: red;
+}
+
+.user-images img {
+	border: 2px rgb(60, 47, 153) solid;
+}
+
+.user-images img:hover {
+	border: 2px white solid;
 }
 
 /* ###################### Editor style ##########################  */
@@ -642,6 +664,12 @@ header p {
 .item1 img {
 	height: 40px;
 	width: 40px;
+	cursor: pointer;
+}
+
+.item1 img:hover {
+	background-color: rgba(0, 106, 255, 0.3);
+	border-radius: 5px;
 }
 
 .grid-container > div {

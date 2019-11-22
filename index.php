@@ -1,4 +1,4 @@
-<?php require "header.php"; ?>
+<?php include "header.php"; include_once "config/setup.php"; ?>
 
 <main>
 	<div class="center">

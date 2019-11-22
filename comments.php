@@ -1,7 +1,7 @@
-<? include 'header.php'; ?>
+<?php include 'header.php'; ?>
 
 <main>
-hello
+
 </main>
 
-<?php 'footer.php'; ?>
+<?php include 'footer.php'; ?>

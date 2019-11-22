@@ -10,7 +10,8 @@ include 'functions/php_functions.php';
 		exit();
 	} else { ?>
 		<?php
-			$images = get_user_images();
+			$images = get_user_images(0);
+			$images_id = get_user_images(1);
 			$array_size = count($images);
 			$i = 0;
 			$username = $_SESSION['username'];
@@ -30,7 +31,14 @@ include 'functions/php_functions.php';
 		<h3>Personal Gallery</h3>
 		<section class="user-images">
 			<?php while ($i < $array_size) { ?>
-				<a href="<?php echo $images[$i]; ?>"><img src="<?php echo $images[$i]; ?>" /></a>
+				<fieldset>
+					<?php $loc = "comments.php?image=" . $images_id[$i]; ?>
+					<img onclick="window.location.href='<?php echo $loc; ?>'" src="<?php echo $images[$i]; ?>" />
+					<span onclick="delete_img('<?php echo $images_id[$i]; ?>')">&xotime;</span>
+					<form id="<?php echo $images_id[$i] . "_form"; ?>" action="includes/delete_img.inc.php" method="post">
+						<input type="hidden" name="del_img" value="<?php echo $images_id[$i]; ?>">
+					</form>
+				</fieldset>
 			<?php $i++;
 				} ?>
 		</section>
@@ -44,6 +52,12 @@ include 'functions/php_functions.php';
 
 	function change_pwd() {
 		window.open("update_password.php", "_blank", "left=500,width=500,scrollbars=no,resizable=no,top=300,height=500");
+	}
+
+	function delete_img(id) {
+		let con = confirm("Are you sure you want to delete image!");
+		if (con)
+			document.getElementById(id + '_form').submit();
 	}
 </script>
 
