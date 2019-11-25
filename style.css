@@ -489,7 +489,7 @@ header p {
 	color: #0dff00;
 }
 
-#email, #pwd {
+.email, #pwd {
 	/* height: 30px; */
 	/* margin: 0 auto; */
 	/* width: 60%; */
@@ -793,7 +793,7 @@ footer h2 {
 		font-size: 15px;
 	}
 						
-	#email, #pwd {
+	.email, #pwd {
 		padding: 10px;
 		width: 60%;
 	}

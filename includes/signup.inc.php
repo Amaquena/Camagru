@@ -62,12 +62,13 @@ if (isset($_POST['signup-submit'])) {
 				";
 
 				// Always set content-type when sending HTML email
-				// $headers = "MIME-Version: 1.0" . "\r\n";
+				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-				$headers .= 'From: Bear <no-reply@superposable.com>' . "\r\n";
+				$headers .= 'From: Bear <no-reply@camagru.com>' . "\r\n";
 
 				if (mail($to, $subject, $msg, $headers)) {
+					try {
 					$sql = "INSERT INTO `users` (username, email, password, verification_code) VALUES (?, ?, ?, ?)";
 					$hashed =  password_hash($password, PASSWORD_DEFAULT);
 					$stmt = $conn->prepare($sql);
@@ -79,15 +80,17 @@ if (isset($_POST['signup-submit'])) {
 
 					header("Location: ../index.php?success=signup&uid=" . $username . "&email=" . $email);
 					exit();
+					} catch (PDOException $e) {
+						die("Connection failed: " . $e->getMessage());
+					}
 				} else {
-					header("Location: ../signup.php?error=mailerror");
+					echo error_get_last()['message'];
+					// header("Location: ../signup.php?error=mailerror");
 					exit();
 				}
 			}
 		} catch (PDOException $e) {
-			echo $e->getMessage();
-			header("Location: ../signup.php?error=sqlerror");
-			exit();
+			die("Connection failed: " . $e->getMessage());
 		}
 	}
 	$conn = null;

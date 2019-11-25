@@ -17,7 +17,7 @@ try {
 		`username` TINYTEXT NOT NULL,
 		`email` TINYTEXT NOT NULL,
 		`password` TINYTEXT NOT NULL,
-		`pp_src` TINYTEXT,
+		`comments_notify` BIT DEFAULT 1 NOT NULL,
 		`verified` BIT DEFAULT 0 NOT NULL,
 		`verification_code` varchar(264) NOT NULL
 		);";
@@ -46,12 +46,14 @@ try {
 	$sql = "CREATE TABLE IF NOT EXISTS `likes`(
 		`like_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 		`like` int(11) DEFAULT 0 NOT NULL,
+		`user_id` INT(11),
 		`image_id` INT(11),
+		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`),
 		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`)
 		);";
 	$conn->exec($sql);
 	$conn = null;
 } catch (PDOException $e) {
-	echo $sql . "<br>" . $e->getMessage();
+	die("Connection failed: " . $e->getMessage());
 }
 $conn = null;

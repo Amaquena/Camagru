@@ -7,6 +7,7 @@ try {
 	// $conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "admins");
 	$conn = new PDO("mysql:host=localhost;dbname=". $DB_DSN .";", $DB_USER , $DB_PASSWORD);
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$conn->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
 
 	// insert data into the users table of the database using PDO
 	//$stmt = $conn->prepare("INSERT INTO users (uidUsers, emailUsers, pwdUsers) VALUES (?,?,?)");

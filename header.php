@@ -29,10 +29,10 @@ session_start();
 			<button id="logout-butt" type="submit" name="logout-submit">Logout</button>
 		</form>
 	</div> <?php
-	} else { ?>
+	} else if (!$_SESSION && isset($_GET['page'])) { ?>
 		<div class="nav-input">
 		<form action="includes/login.inc.php" method="post">
-		<input type="text" name="mailuid" placeholder="Username/E-mail">
+		<input type="text" name="mailuid" value="<?php echo $_GET['mailuid']; ?>" placeholder="Username/E-mail">
 		<input type="password" name="pwd" placeholder="Password">
 		<button type="submit" name="guest-login-submit">Login</button>
 		<input id="login-butt" type="button" value="Login" onclick="location.href='index.php'">

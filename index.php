@@ -28,7 +28,7 @@
 		}
 			?>
 			<form action="includes/login.inc.php" method="post">
-				<input id="email" type="text" name="mailuid" placeholder="Username/E-mail"><br>
+				<input class="email" type="text" name="mailuid" value="<?php echo $_GET['mailuid']; ?>" placeholder="Username/E-mail"><br>
 				<input id="pwd" type="password" name="pwd" placeholder="Password"><br>
 				<button class="login-butt" type="submit" name="login-submit">Login</button><br>
 			</form>

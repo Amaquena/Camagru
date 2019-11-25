@@ -13,7 +13,7 @@ if (isset($_POST['del_img']))
 		exit();
 	} catch (PDOException $e)
 	{
-		echo $e->getMessage();
+		die("Connection failed: " . $e->getMessage());
 	}
 }
 ?>

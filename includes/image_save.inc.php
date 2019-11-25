@@ -34,6 +34,6 @@ if (isset($_POST['upload'])) {
 
 	} catch (PDOException $e)
 	{
-		echo $e->getMessage();
+		die("Connection failed: " . $e->getMessage());
 	}
 }

@@ -22,7 +22,7 @@ if (isset($_POST['login-submit'])) {
 				exit();
 			}
 			if ($passCheck == false) {
-				header("Location: ../index.php?error=wrongpwd");
+				header("Location: ../index.php?error=wrongpwd&mailuid=" . $mailuid);
 				exit();
 			} else if ($passCheck == true) {
 				session_start();
@@ -38,8 +38,7 @@ if (isset($_POST['login-submit'])) {
 				exit();
 			}
 		} catch (PDOException $e) {
-			header("Location: ../index.php?error=sqlerror");
-			exit();
+			die("Connection failed: " . $e->getMessage());
 		}
 	}
 }
@@ -91,8 +90,7 @@ else if (isset($_POST['guest-login-submit']))
 				exit();
 			}
 		} catch (PDOException $e) {
-			header("Location: ../gallery.php?guest=guest&error=sqlerror");
-			exit();
+			die("Connection failed: " . $e->getMessage());
 		}
 	}
 }

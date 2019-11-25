@@ -13,6 +13,7 @@ include 'functions/php_functions.php';
 			$images = get_user_images(0);
 			$images_id = get_user_images(1);
 			$array_size = count($images);
+			$notify = intval(notify_comments());
 			$i = 0;
 			$username = $_SESSION['username'];
 			$user_id = $_SESSION['userId'];
@@ -27,12 +28,20 @@ include 'functions/php_functions.php';
 			Password: <input type="password" name="password" value="00000000" disabled><br>
 			<button id="info" onclick="change_info()">Edit information</button>
 			<button id="info" onclick="change_pwd()">Change password</button>
+			<h6>Do you want to recieve email notifaction on comments? </h6>
+			<form id="notify_form" action="includes/comments_notification.inc.php" method="post">
+				<?php if ($notify == 1) { ?>
+					<input id="box" type="checkbox" name="mail-notify" value="yes" checked="true" onclick="com_not()">
+				<?php } else if ($notify == 0) { ?>
+					<input id="box" type="checkbox" name="mail-notify" value="no" onclick="com_not()">
+				<?php } ?>
+			</form>
 		</section>
 		<h3>Personal Gallery</h3>
 		<section class="user-images">
 			<?php while ($i < $array_size) { ?>
 				<fieldset>
-					<?php $loc = "comments.php?image=" . $images_id[$i]; ?>
+					<?php $loc = "comments.php?image=" . $images[$i] . "&id=" . $images_id[$i]; ?>
 					<img onclick="window.location.href='<?php echo $loc; ?>'" src="<?php echo $images[$i]; ?>" />
 					<span onclick="delete_img('<?php echo $images_id[$i]; ?>')">&xotime;</span>
 					<form id="<?php echo $images_id[$i] . "_form"; ?>" action="includes/delete_img.inc.php" method="post">
@@ -58,6 +67,15 @@ include 'functions/php_functions.php';
 		let con = confirm("Are you sure you want to delete image!");
 		if (con)
 			document.getElementById(id + '_form').submit();
+	}
+
+	function com_not() {
+		var checkbox = document.getElementById('box');
+		if (checkbox.checked == true)
+			checkbox.checked = false;
+		else
+			checkbox.checked = true
+		document.getElementById('notify_form').submit();
 	}
 </script>
 

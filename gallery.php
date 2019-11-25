@@ -38,18 +38,24 @@
 					$i++;
 				} ?>
 			</div>
-			<?php if (intval($_GET["page"]) != 1) { ?>
+			<?php if (intval($_GET["page"]) > 1) { ?>
 				<div class="prev" onclick="<?php $page = intval($_GET["page"]) - 1;
 												$loc = "gallery.php?page=" . $page; ?>window.location.href='<?php echo $loc; ?>'">
 					<h1>PREV</h1>
 				</div>
 			<?php }
-			if (intval($_GET["page"]) != $max_pages) { ?>
+			if (intval($_GET["page"]) < $max_pages) { ?>
 				<div class="next" onclick="<?php $page = intval($_GET["page"]) + 1;
 												$loc = "gallery.php?page=" . $page; ?>window.location.href='<?php echo $loc; ?>'">
 					<h1>NEXT</h1>
 				</di v>
-			<?php } 
+			<?php }
+			if ($max_pages == 0) {
+				?>
+				<p>no images have been upload.</p>
+				<?php
+
+			}
 	}
 			?>
 

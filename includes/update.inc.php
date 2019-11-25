@@ -22,10 +22,9 @@ if (isset($_POST['update-info'])) {
 		exit();
 	} else {
 		try {
-			$sql = "SELECT `password`, `email`  FROM `users` WHERE `user_id` = :userid OR email = :mail";
+			$sql = "SELECT `password`  FROM `users` WHERE `user_id` = :userid";
 			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(":userid", $user_id);
-			$stmt->bindParam(":mail", $email);
 			$stmt->execute();
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
 			$passCheck = password_verify($password, $result['password']);
@@ -34,14 +33,20 @@ if (isset($_POST['update-info'])) {
 				header("Location: ../update.php?error=wrongpwd");
 				exit();
 			}
-			if ($count > 0) {
+			$sql = "SELECT `email` FROM `users`";
+			$stmt = $conn->prepare($sql);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+			if (in_array($email, $result)) {
 				header("Location: ../update.php?error=mailtaken&uid=" . $username);
 				exit();
 			}
-			$sql = "UPDATE `users` SET `username` = ?, `email` = ?";
+
+			$sql = "UPDATE `users` SET `username` = ?,`email` = ? WHERE `user_id` = ?";
 			$stmt = $conn->prepare($sql);
 			$stmt->bindParam(1, $username);
 			$stmt->bindParam(2, $email);
+			$stmt->bindParam(3, $user_id);
 			$stmt->execute();
 			$_SESSION['username'] = $username;
 			$_SESSION['email'] = $email;
@@ -49,9 +54,7 @@ if (isset($_POST['update-info'])) {
 			echo "<script> window.close(); </script>";
 			exit();
 		} catch (PDOException $e) {
-			echo $e->getMessage();
-			// header("Location: ../update.php?error=sqlerror");
-			// exit();
+			die("Connection failed: " . $e->getMessage());
 		}
 	}
 } else if (isset($_POST['update-pass'])) {
@@ -86,25 +89,30 @@ if (isset($_POST['update-info'])) {
 		header("Location: ../update_password.php?error=passwordcheck");
 		exit();
 	} else {
-		$sql = "SELECT `password` FROM `users` WHERE `user_id` = :userid";
-		$stmt = $conn->prepare($sql);
-		$stmt->bindParam(":userid", $user_id);
-		$stmt->execute();
-		$result = $stmt->fetch(PDO::FETCH_ASSOC);
-		$passCheck = password_verify($pwd_current, $result['password']);
-		$count = $stmt->rowCount();
-		if ($passCheck == false) {
-			header("Location: ../update_password.php?error=wrongpwd");
-			exit();
-		} else {
-			$sql = "UPDATE `users` SET `password` = ?";
-			$hashed =  password_hash($password, PASSWORD_DEFAULT);
+		try {
+			$sql = "SELECT `password` FROM `users` WHERE `user_id` = :userid";
 			$stmt = $conn->prepare($sql);
-			$stmt->bindParam(1, $hashed);
+			$stmt->bindParam(":userid", $user_id);
 			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_ASSOC);
+			$passCheck = password_verify($pwd_current, $result['password']);
+			$count = $stmt->rowCount();
+			if ($passCheck == false) {
+				header("Location: ../update_password.php?error=wrongpwd");
+				exit();
+			} else {
+				$sql = "UPDATE `users` SET `password` = ? WHERE `user_id` = ?";
+				$hashed =  password_hash($password, PASSWORD_DEFAULT);
+				$stmt = $conn->prepare($sql);
+				$stmt->bindParam(1, $hashed);
+				$stmt->bindParam(2, $user_id);
+				$stmt->execute();
 
-			echo "<script> window.close(); </script>";
-			exit();
+				echo "<script> window.close(); </script>";
+				exit();
+			}
+		} catch (PDOException $e) {
+			die("Connection failed: " . $e->getMessage());
 		}
 	}
 } else {

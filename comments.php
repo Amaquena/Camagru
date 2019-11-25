@@ -18,7 +18,7 @@
 				<img src="<?php echo $image; ?>">
 			</section>
 			<section class="comment-section">
-				<?php if (isset($_SESSION['userId']))
+				<?php if (isset($_SESSION['userId']) && $_SESSION['verify'] == 1)
 				{
 				?>
 				<form action="includes/comments.inc.php" method="post">
@@ -26,9 +26,10 @@
 					<input type="hidden" name="img-id" value="<?php echo $image_id; ?>">
 					<input type="hidden" name="loc" value="<?php echo $loc; ?>">
 					<button type="submit" name="submit-comment">Send</button>
-					<button id="like-btn" type="submit" name="submit-like" value="<?php echo $likes; ?>" onclick="plus_like()">Like: <?php echo $likes; ?></button>
+					<button id="like-btn" type="submit" name="submit-like" value="<?php echo $likes; ?>" onclick="plus_like()">Like</button>
 				</form>
 				<?php } ?>
+				<p><?php echo $likes; ?></p>
 				<fieldset class="messages">
 						<?php
 						$i = 0;

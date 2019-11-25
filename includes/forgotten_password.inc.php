@@ -94,7 +94,7 @@ if (isset($_POST['send_mail'])) {
 				exit();
 			}
 		} catch (PDOException $e) {
-			echo $e->getMessage();
+			die("Connection failed: " . $e->getMessage());
 		}
 	}
 }
