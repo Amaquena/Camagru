@@ -39,10 +39,10 @@ include	"header.php";
 			}
 			?>
 			<form action="includes/signup.inc.php" method="post">
-				<input class="email" type="text" name="uid" value="<?php echo $_GET['uid']; ?>" placeholder="Username"><br>
-				<input class="email" type="email" name="mail" value="<?php echo $_GET['mail']; ?>" placeholder="E-mail"><br>
-				<input id="pwd" type="password" name="pwd" placeholder="Password"><br>
-				<input id="pwd" type="password" name="pwd-repeat" placeholder="Confirm password"><br>
+				<input class="email" type="text" name="uid" value="<?php if (isset($_GET['uid'])) echo $_GET['uid']; ?>" placeholder="Username"><br>
+				<input class="email" type="email" name="mail" value="<?php if (isset($_GET['mail'])) echo $_GET['mail']; ?>" placeholder="E-mail"><br>
+				<input class="pwd" type="password" name="pwd" placeholder="Password"><br>
+				<input class="pwd" type="password" name="pwd-repeat" placeholder="Confirm password"><br>
 				<button class="signup-butt" type="submit" name="signup-submit">Signup</button>
 			</form>
 		</div>

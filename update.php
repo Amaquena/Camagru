@@ -12,36 +12,34 @@
 	<?php
 	$username = $_SESSION['username'];
 	$user_id = $_SESSION['userId'];
-	$pp_src = $_SESSION['pp_src'];
 	$email = $_SESSION['email'];
 	?>
-	<section class="user-info">
+	<section class="update-user-info">
 		<div id="pp"></div>
 		<?php
 		if (isset($_GET['error'])) {
 			if ($_GET['error'] == "emptyfields") {
-				echo '<p>Fill in all fields</p>';
+				echo '<p class="err">Fill in all fields</p>';
 			} else if ($_GET['error'] == "invalidmailuid") {
-				echo '<p>Invalid username & password</p>';
+				echo '<p class="err">Invalid username & password</p>';
 			} else if ($_GET['error'] == "invalidmail") {
-				echo '<p>Invalid email</p>';
+				echo '<p class="err">Invalid email</p>';
 			} else if ($_GET['error'] == "invaliduid") {
-				echo '<p>Invalid username</p>';
+				echo '<p class="err">Invalid username</p>';
 			} else if ($_GET['error'] == "wrongpwd") {
-				echo '<p>Incorrect password</p>';
+				echo '<p class="err">Incorrect password</p>';
 			} else if ($_GET['error'] == "mailtaken") {
-				echo '<p>Email already registered</p>';
+				echo '<p class="err">Email already registered</p>';
 			}
 		}
 		?>
 		<form action="includes/update.inc.php" method="post">
-			Username: <input type="text" name="username" value="<?php echo $username; ?>"><br>
-			Email: <input type="email" name="email" value="<?php echo $email; ?>"><br>
-			Password: <input type="password" name="password" placeholder="Enter to confirm changes"><br>
+			<p>Username: <input type="text" name="username" value="<?php echo $username; ?>"></p>
+			<p>Email: <input type="email" name="email" value="<?php echo $email; ?>"></p>
+			<p>Password: <input type="password" name="password" placeholder="Enter to confirm changes"></p>
 			<button type="submit" name="update-info">Update info</button>
+			<button id="info" onclick="change_field()">close</button>
 		</form>
-		<!-- Confirm password: <input type="password" name="pwd-repeat" placeholder="Re-enter new password"><br> -->
-		<button id="info" onclick="change_field()">close</button>
 	</section>
 
 </body>

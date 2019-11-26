@@ -21,7 +21,7 @@
 
 	<body>
 		<div class="gallery">
-			<h2>Gallery</h2>
+				<h2>Gallery</h2>
 			<div class="gall-images">
 				<?php
 				$count = 0;
@@ -48,7 +48,7 @@
 				<div class="next" onclick="<?php $page = intval($_GET["page"]) + 1;
 												$loc = "gallery.php?page=" . $page; ?>window.location.href='<?php echo $loc; ?>'">
 					<h1>NEXT</h1>
-				</di v>
+				</div>
 			<?php }
 			if ($max_pages == 0) {
 				?>
@@ -58,7 +58,7 @@
 			}
 	}
 			?>
-
+		</div>
 	</body>
 </main>
 

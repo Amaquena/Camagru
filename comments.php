@@ -22,14 +22,13 @@
 				{
 				?>
 				<form action="includes/comments.inc.php" method="post">
-					<textarea name="comment" class="my-comm" placeholder="Write message here"></textarea>
+					<textarea name="comment" class="my-comm" placeholder="Write comment here"></textarea><br>
 					<input type="hidden" name="img-id" value="<?php echo $image_id; ?>">
 					<input type="hidden" name="loc" value="<?php echo $loc; ?>">
 					<button type="submit" name="submit-comment">Send</button>
-					<button id="like-btn" type="submit" name="submit-like" value="<?php echo $likes; ?>" onclick="plus_like()">Like</button>
+					<button id="like-btn" type="submit" name="submit-like" value="<?php echo $likes; ?>" onclick="plus_like()">Likes: <?php echo $likes; ?></button>
 				</form>
 				<?php } ?>
-				<p><?php echo $likes; ?></p>
 				<fieldset class="messages">
 						<?php
 						$i = 0;
@@ -38,13 +37,13 @@
 							?>
 							<span>
 							<?php
-							echo $usernames[$i];
+							echo "<p class='comm-name'>$usernames[$i] :</p>";
 							echo nl2br("\n");
 							?>
 							</span>
 							<span>
 							<?php
-							echo $com[$i];
+							echo "<p class='comm-text'>$com[$i]</p>";
 							echo nl2br("\n");
 							?>
 							</span>

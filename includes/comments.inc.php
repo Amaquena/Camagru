@@ -14,33 +14,34 @@ if (isset($_POST['submit-comment'])) {
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(1, $msg);
 		if ($stmt->execute()) {
-			$sql = "SELECT `username`, `email`, `image_src` FROM `users`
+			$sql = "SELECT `username`, `email`, `image_src`, `comments_notify` FROM `users`
 			JOIN `images` ON users.user_id = images.user_id
 			WHERE `image_id` = $image_id";
 			$stmt = $conn->prepare($sql);
 			$stmt->execute();
 			$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-			$to = $res[0]['email'];
-			$url = "http://localhost:8081" . $loc;
-			$subject = ucfirst($username) . " commented on your picture.";
-			$msg = "
+			if ($res[0]['comments_notify'] == 1) {
+				$to = $res[0]['email'];
+				$url = "http://localhost:8081" . $loc;
+				$subject = ucfirst($username) . " commented on your picture.";
+				$msg = "
 				<p>Hi " . ucfirst($res[0]['username']) . ",</p>
 				<p>" . ucfirst($username) . " just commented on your image<br /><br /></p>
 				<p>Lets see what was said " . $url . "</p>
 				<p>From,<br /> Bear</p>
 				";
-			// setting content-type to send HTML email
-			$headers = "MIME-Version: 1.0" . "\r\n";
-			$headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
+				// setting content-type to send HTML email
+				$headers = "MIME-Version: 1.0" . "\r\n";
+				$headers = "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-			$headers .= 'From: Bear <no-reply@camagru.com>' . "\r\n";
-			if (!mail($to, $subject, $msg, $headers)) {
-				echo error_get_last()['message'];
-				exit();
+				$headers .= 'From: Bear <no-reply@camagru.com>' . "\r\n";
+				if (!mail($to, $subject, $msg, $headers)) {
+					echo error_get_last()['message'];
+					exit();
+				}
 			}
 		}
-
 		header("Location: " . $loc);
 		exit();
 	} catch (PDOException $e) {

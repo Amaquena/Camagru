@@ -28,7 +28,7 @@ function get_user_images($coll)
 
 		$user_id = $_SESSION['userId'];
 
-		$sql = "SELECT `image_src`, `image_id` FROM `images` WHERE `user_id` = ?";
+		$sql = "SELECT `image_src`, `image_id` FROM `images` WHERE `user_id` = ? ORDER BY `image_id` DESC";
 		$stmt = $conn->prepare($sql);
 		$stmt->bindParam(1, $user_id);
 		$stmt->execute();
@@ -111,7 +111,7 @@ function get_user_comments($image_id, $coll)
 	JOIN `users` ON users.user_id = comments.user_id)
 	JOIN `images` ON images.image_id = comments.image_id)
 	WHERE comments.image_id = $image_id
-	ORDER BY `comment_id` ASC";
+	ORDER BY `comment_id` DESC";
 
 		$stmt = $conn->prepare($sql);
 		$stmt->execute();

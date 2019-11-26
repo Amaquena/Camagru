@@ -6,6 +6,7 @@ if (isset($_POST['signup-submit'])) {
 	$email = htmlspecialchars($_POST['mail']);
 	$password = htmlspecialchars($_POST['pwd']);
 	$passwordRepeat = htmlspecialchars($_POST['pwd-repeat']);
+	
 	if (empty($username) || empty($email) || empty($password) || empty($passwordRepeat)) {
 		header("Location: ../signup.php?error=emptyfields&uid=" . $username . "&mail=" . $email);
 		exit();
@@ -55,7 +56,7 @@ if (isset($_POST['signup-submit'])) {
 				$to = $email;
 				$subject = "Email Verification!";
 				$msg = "
-			 	<p>Hi $username,</p>
+				<p>Hi $username,</>
 				<p>Thank you for signing up, please click the link below to verify your account.<br /><br /></p>
 				<p>$verificationlink</p>
 				<p>From,<br /> Bear</p>
@@ -69,17 +70,17 @@ if (isset($_POST['signup-submit'])) {
 
 				if (mail($to, $subject, $msg, $headers)) {
 					try {
-					$sql = "INSERT INTO `users` (username, email, password, verification_code) VALUES (?, ?, ?, ?)";
-					$hashed =  password_hash($password, PASSWORD_DEFAULT);
-					$stmt = $conn->prepare($sql);
-					$stmt->bindParam(1, $username);
-					$stmt->bindParam(2, $email);
-					$stmt->bindParam(3, $hashed);
-					$stmt->bindParam(4, $verificationcode);
-					$stmt->execute();
+						$sql = "INSERT INTO `users` (username, email, password, verification_code) VALUES (?, ?, ?, ?)";
+						$hashed =  password_hash($password, PASSWORD_DEFAULT);
+						$stmt = $conn->prepare($sql);
+						$stmt->bindParam(1, $username);
+						$stmt->bindParam(2, $email);
+						$stmt->bindParam(3, $hashed);
+						$stmt->bindParam(4, $verificationcode);
+						$stmt->execute();
 
-					header("Location: ../index.php?success=signup&uid=" . $username . "&email=" . $email);
-					exit();
+						header("Location: ../index.php?success=signup&mailuid=" . $username);
+						exit();
 					} catch (PDOException $e) {
 						die("Connection failed: " . $e->getMessage());
 					}

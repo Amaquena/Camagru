@@ -2,9 +2,6 @@
 session_start();
 
 if (isset($_POST['upload'])) {
-	// $conn = new PDO("mysql:host=localhost;dbname=camagru;", "root", "admins");
-	// $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
 	include '../config/database.php';
 
 	$user_id = $_SESSION['userId'];

@@ -19,17 +19,17 @@
 				}
 			} if (isset($_GET['success'])) {
 			if ($_GET['success'] == "signup") {
-				echo '<p id="success">Registered!<br />Verify email to login<p>';
+				echo '<p class="success">Registered!<br />Verify email to login<p>';
 			} else if ($_GET['success'] == "verified") {
-				echo '<p id="success">Verified!<br />Please login<p>';
+				echo '<p class="success">Verified!<br />Please login<p>';
 			} else if ($_GET['success'] == "pwdchanged") {
-				echo '<p id="success">Password successfully changed!<br />Please login<p>';
+				echo '<p class="success">Password successfully changed!<br />Please login<p>';
 			}
 		}
 			?>
 			<form action="includes/login.inc.php" method="post">
-				<input class="email" type="text" name="mailuid" value="<?php echo $_GET['mailuid']; ?>" placeholder="Username/E-mail"><br>
-				<input id="pwd" type="password" name="pwd" placeholder="Password"><br>
+				<input class="email" type="text" name="mailuid" value="<?php if (isset($_GET['mailuid'])) echo $_GET['mailuid']; ?>" placeholder="Username/E-mail"><br>
+				<input class="pwd" type="password" name="pwd" placeholder="Password"><br>
 				<button class="login-butt" type="submit" name="login-submit">Login</button><br>
 			</form>
 			<input type="button" class="signup-butt" value="Signup" onclick="location.href='signup.php';"><br>

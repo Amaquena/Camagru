@@ -17,28 +17,26 @@ include 'functions/php_functions.php';
 			$i = 0;
 			$username = $_SESSION['username'];
 			$user_id = $_SESSION['userId'];
-			$pp_src = $_SESSION['pp_src'];
 			$email = $_SESSION['email'];
 			?>
-		<h3>Information</h3>
-		<section class="user-info">
-			<div id="pp"></div>
-			Username: <input type="text" name="username" value="<?php echo $username; ?>" disabled><br>
-			Email: <input type="email" name="email" value="<?php echo $email; ?>" disabled><br>
-			Password: <input type="password" name="password" value="00000000" disabled><br>
+		<section class="profile-user-info">
+			<h3>Information</h3>
+			<p>Username:<input type="text" name="username" value="<?php echo $username; ?>" disabled><br></p>
+			<p>Email:<input type="email" name="email" value="<?php echo $email; ?>" disabled><br></p>
+			<p>Password:<input type="password" name="password" value="00000000" disabled><br></p>
 			<button id="info" onclick="change_info()">Edit information</button>
 			<button id="info" onclick="change_pwd()">Change password</button>
-			<h6>Do you want to recieve email notifaction on comments? </h6>
+			<p>notifications:</p>
 			<form id="notify_form" action="includes/comments_notification.inc.php" method="post">
 				<?php if ($notify == 1) { ?>
-					<input id="box" type="checkbox" name="mail-notify" value="yes" checked="true" onclick="com_not()">
-				<?php } else if ($notify == 0) { ?>
-					<input id="box" type="checkbox" name="mail-notify" value="no" onclick="com_not()">
+					<input id="box" type="checkbox" name="mail-notify" checked="true" onclick="com_not()">
+				<?php } else { ?>
+					<input id="box" type="checkbox" name="mail-notify" onclick="com_not()">
 				<?php } ?>
 			</form>
 		</section>
-		<h3>Personal Gallery</h3>
-		<section class="user-images">
+		<section class="profile-user-images">
+				<h3>Personal Gallery</h3>
 			<?php while ($i < $array_size) { ?>
 				<fieldset>
 					<?php $loc = "comments.php?image=" . $images[$i] . "&id=" . $images_id[$i]; ?>
@@ -70,20 +68,8 @@ include 'functions/php_functions.php';
 	}
 
 	function com_not() {
-		var checkbox = document.getElementById('box');
-		if (checkbox.checked == true)
-			checkbox.checked = false;
-		else
-			checkbox.checked = true
 		document.getElementById('notify_form').submit();
 	}
 </script>
 
 <?php require 'footer.php' ?>
-<!-- 
-$_SESSION['userId'] = $result['user_id'];
-$_SESSION['username'] = $result['username'];
-$_SESSION['pp_src'] = $result['pp_src'];
-$_SESSION['verify'] = $result['verified']; 
-$_SESSION['email'] = $result['email'];
--->

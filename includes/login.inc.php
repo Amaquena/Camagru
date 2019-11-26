@@ -28,7 +28,6 @@ if (isset($_POST['login-submit'])) {
 				session_start();
 				$_SESSION['userId'] = $result['user_id'];
 				$_SESSION['username'] = $result['username'];
-				$_SESSION['pp_src'] = $result['pp_src'];
 				$_SESSION['verify'] = $result['verified'];
 				$_SESSION['email'] = $result['email'];
 				header("Location: ../gallery.php?page=1");
@@ -58,7 +57,7 @@ else if (isset($_POST['guest-login-submit']))
 	$password = htmlspecialchars($_POST['pwd']);
 
 	if (empty($mailuid) || empty($password)) {
-		header("Location: ../gallery.php?guest=guest&error=emptyfields");
+		header("Location: ../gallery.php?page=1&error=emptyfields");
 		exit();
 	} else {
 		try {
@@ -70,23 +69,22 @@ else if (isset($_POST['guest-login-submit']))
 			$passCheck = password_verify($password, $result['password']);
 			if (!$result)
 			{
-				header("Location: ../gallery.php?guest=guest&error=nouser");
+				header("Location: ../gallery.php?page=1&error=nouser");
 				exit();
 			}
 			if ($passCheck == false) {
-				header("Location: ../gallery.php?guest=guest&error=wrongpwd");
+				header("Location: ../gallery.php?page=1&error=wrongpwd");
 				exit();
 			} else if ($passCheck == true) {
 				session_start();
 				$_SESSION['userId'] = $result['user_id'];
 				$_SESSION['username'] = $result['username'];
-				$_SESSION['pp_src'] = $result['pp_src'];
 				$_SESSION['verify'] = $result['verified'];
 				$_SESSION['email'] = $result['email'];
 				header("Location: ../gallery.php?page=1");
 				exit();
 			} else {
-				header("Location: ../gallery.php?eguest=guest&error=wrongpwd");
+				header("Location: ../gallery.php?page=1&error=wrongpwd");
 				exit();
 			}
 		} catch (PDOException $e) {
@@ -96,6 +94,6 @@ else if (isset($_POST['guest-login-submit']))
 }
 else
 {
-	header("Location: ../gallery.php?guest=guest");
+	header("Location: ../gallery.php?page=1");
 	exit();
 }

@@ -423,19 +423,24 @@ header p {
 	color: #0088a9;
 }
 
-#logout-butt {
+.nav-links li a.active {
+	color: #0088a9;
+}
+
+
+.logout-butt {
 	width: 70px;
 }
 
-.nav-input button:not(#logout-butt) {
+.nav-input button:not(.logout-butt) {
 	display: none;
 }
 
-.nav-input input:not(#signup-butt):not(#login-butt) {
+.nav-input input:not(.signup-butt):not(.login-butt) {
 	display: none;
 }
 
-.nav-input button, #signup-butt, #login-butt {
+.nav-input button, .signup-butt, .login-butt {
 	padding: 9px 25px;
 	background-color: rgba(0,136,169,1);
 	border: none;
@@ -445,26 +450,23 @@ header p {
 	transition: all 0.3 ease 0s;
 }
 
-.nav-input button:hover, #signup-butt:hover, #login-butt:hover{
+.nav-input button:hover, .signup-butt:hover, .login-butt:hover{
 	background-color: rgba(0,136,169,0.8);
 }
 
+/*######################### Index style ###################*/
+
 .center {
-	margin: 20% auto 0;
-	/* position: relative; */
+	margin: 10% auto 0;
 	background-color: rgb(255, 255, 255, 0.5);
-	/* height: 50vh; */
-	width: 200px;
-	height: 300px;
+	width: 230px;
+	height: 310px;
 	border-radius: 15px;
 }
 
 .logins {
 	text-align: center;
-	/* top: 8%; */
-	/* margin: 30px auto; */
-	/* position: relative; */
-	padding-top: 30px;
+	padding-top: 10px;
 	height: calc(100% - 30px);
 	width: 100%;
 }
@@ -485,38 +487,28 @@ header p {
 	font-size: medium;
 }
 
-.logins #success {
-	color: #0dff00;
+.logins .success {
+	color:#277a42;
 }
 
-.email, #pwd {
-	/* height: 30px; */
-	/* margin: 0 auto; */
-	/* width: 60%; */
-	/* overflow: auto; */
+.email, .pwd {
 	margin: 4% 0;
 }
 
 .logins .login-butt {
 	background-color: rgb(0, 106, 255);
-	/* font-size: 1.5vw; */
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 10px 10px 10px 10px;
 	height: 25px;
 	width: 60%;
-	/* overflow: auto; */
-	/* margin-top: 5%; */
 	cursor: pointer;
 }
 
 .signup-butt {
-	background-color: rgb(57, 160, 179);
-	/* font-size: 1.5vw; */
 	font-family: Arial, Helvetica, sans-serif;
 	border-radius: 10px 10px 10px 10px;
 	height: 25px;
 	width: 60%;
-	/* overflow: auto; */
 	margin-top: 10%;
 	margin-bottom: 5%;
 	cursor: pointer;
@@ -535,86 +527,149 @@ header p {
 	text-transform: capitalize;
 }
 
-#logout-butt {
+.logout-butt {
 	float: right;
 	border-radius: 10px 10px 10px 10px;
 }
 
 /* ################### Gallery #############################  */
 .gallery {
-	background-color: beige;
+	background-color: rgba(255, 255, 255, 0.5);
 	width: 300px;
-	margin: 0 auto 30px;
+	margin: 10px auto 30px;
 	overflow: hidden;
+}
 
+.gallery > p {
+	line-height: 100px;
+	font-family: cursive;
+	text-align: center;
+	font-weight: 800;
+	text-transform: uppercase;
 }
 
 .gall-images > p {
 	text-transform: capitalize;
+	line-height: 30px;
 }
 
 .gallery h2 {
+	text-transform: uppercase;
+	font-size: xx-large;
 	text-align: center;
+	color: rgb(60, 47, 153);
+	font-weight: 700;
+	font-family: monospace;
 }
 .prev {
+	cursor: pointer;
 	float: left;
+	text-transform: uppercase;
+	font-size: xx-large;
+	color: rgb(60, 47, 153);
+	font-weight: 700;
+	font-family: monospace;
 }
 .next {
+	cursor: pointer;
 	float: right;
+	text-transform: uppercase;
+	font-size: xx-large;
+	color: rgb(60, 47, 153);
+	font-weight: 700;
+	font-family: monospace;
+
 }
 .gallery img {
-	margin: 20px;
 	height: 220px;
-	background-color: #ccc;
+	width: 280px;
+	/* background-color: #ccc; */
+	margin: 0 10px;
 }
+
+.gallery img:hover {
+	cursor: pointer;
+	border: 2px white solid;
+}
+
 
 /* ###################### Profile style ##########################  */
 
-.user-info {
+.profile-user-info {
 	background-color: rgba(255, 255, 255, 0.5);
 	width: 300px;
-	margin: 0 auto;
+	margin: 10px auto 0;
 }
 
-.user-info p {
+.profile-user-info h3 {
+	text-transform: uppercase;
+	font-size: xx-large;
 	text-align: center;
+	color: rgb(60, 47, 153);
+	font-weight: 700;
+	font-family: monospace;
 }
 
-#pp {
-	height: 150px;
-	width: 150px;
-	background-image: url(images/default-user-image.png);
-	background-size: cover;
-	background-repeat: no-repeat;
-	margin: 30px auto 0;
-	border-radius: 10px;
+.profile-user-info p {
+	text-transform: capitalize;
+	font-family: monospace;
+	line-height: 25px;
+}
+.profile-user-info input:not(#box) {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 200px;
+	box-sizing: border-box;
+	text-align: center;
+	border: transparent;
 }
 
-
-.user-images {
+.profile-user-images {
+	background-color: rgba(255, 255, 255, 0.5);
 	width: 300px;
-	margin: 20px auto 0;
+	margin: 10px auto 30px;
+	overflow: hidden;
 }
 
-.user-images span{
+.profile-user-images h3 {
+	text-transform: uppercase;
+	font-size: xx-large;
+	text-align: center;
+	color: rgb(60, 47, 153);
+	font-weight: 700;
+	font-family: monospace;
+}
+
+.profile-user-images span{
 	font-size: xx-large;
 	color: white;
 	position: absolute;
-	margin-top: -245px;
-	margin-left: 290px;
+	margin-top: -210px;
+	margin-left: 260px;
 	cursor: pointer;
 }
 
-.user-images span:hover {
+.profile-user-images span:hover {
 	color: red;
 }
 
-.user-images img {
-	border: 2px rgb(60, 47, 153) solid;
+.profile-user-images img {
+	
+	width: 280px;
+	margin: 0 10px;
+	/* background-color: #ccc; */
+	
 }
 
-.user-images img:hover {
+.profile-user-images img:hover {
 	border: 2px white solid;
+	cursor: pointer;
+}
+
+.profile-user-images fieldset {
+	height: 220px;
+	margin-top: 10px;
+	width: 300px;
 }
 
 /* ###################### Editor style ##########################  */
@@ -719,42 +774,104 @@ header p {
 	cursor: pointer; /* "hand" cursor */
 }
 
-/*####################### Gallery style ##############################*/
-.grid {
-	display: grid;
-	grid-template-columns: 50px 1fr 1fr;
-}
-
-.grid div:nth-child(even) {
-	background-color: #ccc;
-}
-
-.grid div:nth-child(odd) {
-	background-color: beige;
-}
 /*########################### Comment page Style ##############################*/
 
+.comment-wrapper {
+	width: 300px;
+	margin: 10px auto;
+}
 .comment-image { grid-area: image; }
 .comment-section { grid-area: comments; }
 
 .comment-grid {
 	display: grid;
-	grid-template-rows: fit-content(40%);
-	/* grid-template-columns: repeat(2, 1fr); */
 	grid-template-areas:
 		'image'
 		'comments';
-	grid-gap: 10px;
-	background-color: orange;
-	padding: 10px;
+	background-color:#00bdcf;
+	border-radius: 10px;
+}
+
+.comment-image {
+	margin: 10px auto;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
+}
+
+.comment-image img {
+	width: 280px;
+}
+
+.comment-section {
+	margin: 10px;
+}
+
+.comment-section textarea {
+	resize: none;
+	width: 260px;
+	margin: 0 auto 10px;
+	height: 100px;
+}
+
+.comm-name {
+	text-transform: capitalize;
+	font-family: monospace;
+	font-weight: 700;
+	font-size: larger;
+	color: #f5f095;
+}
+
+.comm-text {
+	padding-left: 10px;
+	text-transform: initial;
+	font-family: monospace;
+	font-weight: 700;
+	font-size: larger;
+	color: #deba04;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 100px;
+}
+
+#like-btn {
+	float: right;
+}
+
+/* ###################### Upadate/password style ##########################  */
+
+.update-user-info {
+	width: 400px;
+	margin: 30px auto;
+	padding: 20px;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+.update-user-info p {
+	text-transform: capitalize;
+	font-family: monospace;
+	line-height: 25px;
+}
+
+.update-user-info input {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 200px;
+	box-sizing: border-box;
+	text-align: center;
+	border: transparent;
+}
+.update-user-info > .err {
+	color: #ff0000;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.update-user-info #info {
+float: right;
 }
 
 /*########################### Footer Style ##############################*/
 footer {
 	position: relative;
 	bottom: 0;
-	/* left: 5%;
-	right: 5%; */
 	padding-bottom: 20px;
 	clear:both;
 }
@@ -768,6 +885,8 @@ footer h2 {
 /*########################### Portalable styling ####################*/
 
 @media only screen and (min-width: 768px) {
+	/*######################### Header style ###################*/
+
 	nav {
 		margin-right: 10%;
 	}
@@ -777,6 +896,8 @@ footer h2 {
 		width: 80px;
 	}
 	
+	/*######################### Index style ###################*/
+
 	.center {
 		width: 400px;
 		height: 450px;
@@ -788,12 +909,15 @@ footer h2 {
 		font-size: 40px;
 		font-weight: 650;
 	}
+	.logins p {
+		font-size: larger;
+	}
 						
 	::-webkit-input-placeholder{
 		font-size: 15px;
 	}
 						
-	.email, #pwd {
+	.email, .pwd {
 		padding: 10px;
 		width: 60%;
 	}
@@ -806,15 +930,15 @@ footer h2 {
 		margin-top: 5%;
 	}
 	
-	.nav-input input:not(#signup-butt):not(#login-butt) {
+	.nav-input input:not(.signup-butt):not(.login-butt) {
 		display: inline;
 	}
 
-	.nav-input button:not(#logout-butt) {
+	.nav-input button:not(.logout-butt) {
 		display: inline;
 	}
 
-	.nav-input #login-butt {
+	.nav-input .login-butt {
 		display: none;
 	}
 
@@ -837,18 +961,35 @@ footer h2 {
 		background-color: #2196F3;
 		padding: 10px;
 	}
+
+	/*########################### Comment page Style ##############################*/
+
+.comment-wrapper {
+	width: 600px;
+	margin: 10px auto;
+}
+
+.comment-section {
+	margin: 10px auto;
+}
+
+.comment-section textarea {
+	width: 300px;
+	margin-left: auto;
+}
+
 }
 
 @media only screen and (min-width: 1000px) {
 	.center {
-		margin-top: 10%;
+		margin-top: 5%;
 	}
 
 	.logins p {
 		font-size: larger;
 	}
 
-	.logins #login-butt {
+	.logins .login-butt {
 		height: 35px;
 	}
 	.signup-butt {
@@ -868,4 +1009,98 @@ footer h2 {
 		width: 1000px;
 		margin: 0 auto;
 	}
+
+	/* ################### Gallery #############################  */
+
+.gallery {
+	width: 800px;
+	padding: 25px;
+}
+
+.gallery > p {
+	font-size: x-large;
+}
+
+.gall-images > p {
+	line-height: 50px;
+	font-size: larger;
+	font-weight: 700;
+	margin-left: -150px;
+	/* padding-left: 20px; */
+}
+
+.gall-images {
+	margin: 0 auto;
+	width: 280px;
+	/* background-color: black; */
+}
+
+.gallery img:hover {
+	cursor: pointer;
+	border: 2px white solid;
+}
+
+
+	/* ###################### Profile style ##########################  */
+
+	.profile-user-info {
+		width: 750px;
+		padding-left: 50px;
+		padding-bottom: 20px;
+	}
+
+	.profile-user-info p {
+		line-height: 50px;
+		font-size: larger;
+		font-weight: 700;
+	}
+	.profile-user-info input:not(#box) {
+		max-width: 400px;
+		text-align: center;
+	}
+
+	.profile-user-images {
+		width: 800px;
+	}
+
+.profile-user-images img {
+	
+	width: 280px;
+	margin: 0 10px;
+	/* background-color: #ccc; */
+	
+}
+
+.profile-user-images img:hover {
+	border: 2px white solid;
+	cursor: pointer;
+}
+
+.profile-user-images fieldset {
+	margin: 10px auto;
+}
+/*########################### Comment page Style ##############################*/
+
+.comment-wrapper {
+	width: 800px;
+	margin: 10px auto;
+}
+
+.comment-section {
+	margin: 10px auto;
+}
+
+.comment-section textarea {
+	width: 400px;
+	margin-left: auto;
+}
+
+.comm-name {
+	font-size: x-large;
+}
+
+.comm-text {
+	font-size: x-large;
+}
+
 }

@@ -28,7 +28,7 @@ try {
 		`image_id` INT(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
 		`image_src` TEXT NOT NULL,
 		`user_id` INT(11),
-		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
+		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 		);";
 	$conn->exec($sql);
 
@@ -38,8 +38,8 @@ try {
 		`comment` TEXT NOT NULL,
 		`user_id` INT(11),
 		`image_id` INT(11),
-		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`),
-		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`)
+		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`) ON DELETE CASCADE ON UPDATE CASCADE
 		);";
 	$conn->exec($sql);
 
@@ -48,8 +48,8 @@ try {
 		`like` int(11) DEFAULT 0 NOT NULL,
 		`user_id` INT(11),
 		`image_id` INT(11),
-		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`),
-		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`)
+		FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+		FOREIGN KEY (`image_id`) REFERENCES `images`(`image_id`) ON DELETE CASCADE ON UPDATE CASCADE
 		);";
 	$conn->exec($sql);
 	$conn = null;
