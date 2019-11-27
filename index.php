@@ -24,6 +24,8 @@
 				echo '<p class="success">Verified!<br />Please login<p>';
 			} else if ($_GET['success'] == "pwdchanged") {
 				echo '<p class="success">Password successfully changed!<br />Please login<p>';
+			} else if ($_GET['success'] == "pwdreset") {
+				echo '<p class="success">Please check email to reset your password!<p>';
 			}
 		}
 			?>

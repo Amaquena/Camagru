@@ -868,6 +868,39 @@ header p {
 float: right;
 }
 
+/*########################### Forgettten_password Style ##############################*/
+
+.forget-password {
+	width: 400px;
+	margin: 30px auto;
+	padding: 20px;
+	overflow: hidden;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.forget-password input {
+	margin: 10px auto;
+	width: 100%;
+	max-width: 200px;
+	box-sizing: border-box;
+	text-align: center;
+	border: transparent;
+	border: #000 1px solid;
+}
+.forget-password button {
+	margin-top: 10px;
+}
+
+.forget-password p {
+	color: #ff0000;
+	font-style: oblique;
+	font-size: larger;
+	line-height: 30px;
+	text-align: center;
+	font-weight: 600;
+	line-height: 20px;
+}
+
 /*########################### Footer Style ##############################*/
 footer {
 	position: relative;
